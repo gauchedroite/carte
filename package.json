@@ -1,0 +1,17 @@
+{
+  "name": "carte",
+  "version": "1.0.0",
+  "description": "Cartes pour Laura",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w"
+  },
+  "author": "Papi",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "croquis.js": "^0.0.3"
+  }
+}
