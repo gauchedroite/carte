@@ -12,4 +12,3 @@ function resizeCanvas() {
 // Add event listeners to resize the canvas appropriately
 window.addEventListener("load", resizeCanvas);
 window.addEventListener("resize", resizeCanvas);
-
