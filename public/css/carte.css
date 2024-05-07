@@ -1,0 +1,31 @@
+body {
+    background-color: #888;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+
+#tablet-api {
+    position: absolute;
+    top: -1000px;
+}
+
+#canvas-area {
+    display: inline-block;
+    cursor: crosshair;
+}
+
+.croquis-dirty-rect-display {
+    touch-action: none;
+}
+
+
+/*
+.brush-pointer {
+    position: absolute;
+    font-size: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+*/

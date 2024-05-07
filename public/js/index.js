@@ -9,6 +9,6 @@ function resizeCanvas() {
     ctx.fillRect(10, 10, 150, 100);
 }
 // Add event listeners to resize the canvas appropriately
-window.addEventListener('load', resizeCanvas);
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener("load", resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
 //# sourceMappingURL=index.js.map
