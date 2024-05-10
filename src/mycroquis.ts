@@ -8,6 +8,7 @@ croquis.setCanvasSize(640, 480);
 croquis.addLayer();
 croquis.fillLayer('#fff');
 croquis.addLayer();
+croquis.addLayer();
 croquis.selectLayer(1);
 croquis.unlockHistory();
 
@@ -144,3 +145,16 @@ function setPointerEvent(e: any) {
         }
     }
 }
+
+
+
+const kri1 = document.getElementById("kri-1")!;
+const kri2 = document.getElementById("kri-2")!;
+
+kri1.addEventListener("click", function() {
+    croquis.selectLayer(1);
+})
+
+kri2.addEventListener("click", function() {
+    croquis.selectLayer(2);
+})
