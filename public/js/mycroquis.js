@@ -2,7 +2,7 @@
 // Initialize croquis
 var croquis = new Croquis();
 croquis.lockHistory();
-croquis.setCanvasSize(640, 480);
+croquis.setCanvasSize(640, 940);
 croquis.addLayer();
 croquis.fillLayer('#fff');
 croquis.addLayer();
@@ -10,12 +10,12 @@ croquis.addLayer();
 croquis.selectLayer(1);
 croquis.unlockHistory();
 var brush = new Croquis.Brush();
-brush.setSize(40);
+brush.setSize(4);
 brush.setColor('#000');
 brush.setSpacing(0.2);
 croquis.setTool(brush);
 croquis.setToolStabilizeLevel(10);
-croquis.setToolStabilizeWeight(0.5);
+croquis.setToolStabilizeWeight(0.1); //(0.5);
 var croquisDOMElement = croquis.getDOMElement();
 var canvasArea = document.getElementById('canvas-area');
 canvasArea.appendChild(croquisDOMElement);
