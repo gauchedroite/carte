@@ -158,3 +158,42 @@ kri1.addEventListener("click", function() {
 kri2.addEventListener("click", function() {
     croquis.selectLayer(2);
 })
+
+
+
+async function uploadCanvasData(url: string, canvas: HTMLCanvasElement) {
+    const imageDataUrl = canvas.toDataURL("image/png");
+    const body = JSON.stringify({ image: imageDataUrl });
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.text(); //.json(); // or `response.text()` if your server sends a text response
+}
+
+const kri_upload = document.getElementById("kri-upload")!;
+kri_upload.addEventListener("click", function() {
+    const canvas = croquis.getLayerCanvas(1);
+    uploadCanvasData("/upload-canvas", canvas)
+        .then(data => console.log('Success:', data))
+        .catch(error => console.error('Error:', error));
+})
+
+
+
+const kri_load = document.getElementById("kri-load")!;
+kri_load.addEventListener("click", function() {
+    const canvas = croquis.getLayerCanvas(1);
+    const ctx = canvas.getContext("2d");
+
+    const img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+    };
+    img.src = "/assets/layer-1.png";
+})

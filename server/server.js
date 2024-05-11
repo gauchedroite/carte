@@ -1,5 +1,5 @@
 const express = require("express");
-const multer = require("multer");
+const bodyParser = require('body-parser');
 const fs = require("fs-extra");
 const path = require("path");
 
@@ -14,30 +14,32 @@ const assetsPath = path.join(__dirname, "../public/assets");
 // Configure express
 app.use(express.static(publicPath));
 
-// Configure multer
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// Middleware to parse JSON bodies
+app.use(bodyParser.json({ limit: "50mb" }));
 
 
-app.post("/upload", upload.single("file"), async (req, res) => {
-    if (req.file && req.body.filename) {
-        const fileName = req.body.filename; // Read filename from the body, specified by client
+app.post("/upload-canvas", async (req, res) => {
+    //if (req.file && req.body.filename) {
+        const data = req.body.image;  // Get image data URL from request body
+        const base64Data = data.replace(/^data:image\/png;base64,/, "");
+
+        const fileName = "cheval.png"; //req.body.filename; // Read filename from the body, specified by client
         const filePath = path.join(assetsPath, fileName);
 
         try {
             await fs.ensureDir(assetsPath);
 
-            // Write the file from memory (buffer) to disk
-            await fs.writeFile(filePath, req.file.buffer);
+            // Write the file to disk
+            await fs.writeFile(filePath, base64Data, "base64");
             res.status(200).send("File uploaded and saved as " + fileName);
         }
         catch (error) {
             res.status(500).send("Failed to upload file: " + error.message);
         }
-    }
-    else {
-        res.status(400).send("No file uploaded or filename not specified.");
-    }
+    //}
+    //else {
+    //    res.status(400).send("No file uploaded or filename not specified.");
+    //}
 });
 
 
