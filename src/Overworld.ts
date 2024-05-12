@@ -29,10 +29,5 @@ export default class Overworld {
 
         this._canvas.width = width;
         this._canvas.height = height;
-
-        // Your drawing code here
-        const ctx = this._canvas.getContext("2d") as CanvasRenderingContext2D;
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, this._width, this._height);
     }
 }

@@ -4,7 +4,7 @@ declare const Croquis: any;
 // Initialize croquis
 var croquis = new Croquis();
 croquis.lockHistory();
-croquis.setCanvasSize(640, 940);
+croquis.setCanvasSize(405, 675);
 croquis.addLayer();
 croquis.fillLayer('#fff');
 croquis.addLayer();
@@ -23,7 +23,7 @@ croquis.setToolStabilizeWeight(0.1); //(0.5);
 
 
 var croquisDOMElement = croquis.getDOMElement();
-var canvasArea = document.getElementById('canvas-area')!;
+var canvasArea = document.getElementById('canvas_area')!;
 canvasArea.appendChild(croquisDOMElement);
 function canvasPointerDown(e: any) {
     setPointerEvent(e);
@@ -147,7 +147,7 @@ function setPointerEvent(e: any) {
 }
 
 
-
+/*
 const kri1 = document.getElementById("kri-1")!;
 const kri2 = document.getElementById("kri-2")!;
 
@@ -197,3 +197,4 @@ kri_load.addEventListener("click", function() {
     };
     img.src = "/assets/layer-1.png";
 })
+*/

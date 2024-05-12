@@ -17,13 +17,18 @@
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body unselectable="on">
+    <object id="tablet_api" type="application/x-wacomtabletplugin"></object>
 
     <div class="grid-container">
         <div class="center-canvas">
-            <canvas id="card_canvas"></canvas>
+            <!-- <canvas id="card_canvas"></canvas> -->
+            <div id="canvas_area"></div>
         </div>
     </div>
 
-    <script type="module" src="./js/index.js"></script>
+    <script src="./lib/croquis.js"></script>
+    <script src="./js/mycroquis.js"></script>
+
+    <!-- <script type="module" src="./js/index.js"></script> -->
 </body>
 </html>

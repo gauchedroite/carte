@@ -2,7 +2,7 @@
 // Initialize croquis
 var croquis = new Croquis();
 croquis.lockHistory();
-croquis.setCanvasSize(640, 940);
+croquis.setCanvasSize(405, 675);
 croquis.addLayer();
 croquis.fillLayer('#fff');
 croquis.addLayer();
@@ -17,7 +17,7 @@ croquis.setTool(brush);
 croquis.setToolStabilizeLevel(10);
 croquis.setToolStabilizeWeight(0.1); //(0.5);
 var croquisDOMElement = croquis.getDOMElement();
-var canvasArea = document.getElementById('canvas-area');
+var canvasArea = document.getElementById('canvas_area');
 canvasArea.appendChild(croquisDOMElement);
 function canvasPointerDown(e) {
     setPointerEvent(e);
@@ -122,17 +122,24 @@ function setPointerEvent(e) {
         }
     }
 }
-const kri1 = document.getElementById("kri-1");
-const kri2 = document.getElementById("kri-2");
-kri1.addEventListener("click", function () {
+/*
+const kri1 = document.getElementById("kri-1")!;
+const kri2 = document.getElementById("kri-2")!;
+
+kri1.addEventListener("click", function() {
     croquis.selectLayer(1);
-});
-kri2.addEventListener("click", function () {
+})
+
+kri2.addEventListener("click", function() {
     croquis.selectLayer(2);
-});
-async function uploadCanvasData(url, canvas) {
+})
+
+
+
+async function uploadCanvasData(url: string, canvas: HTMLCanvasElement) {
     const imageDataUrl = canvas.toDataURL("image/png");
     const body = JSON.stringify({ image: imageDataUrl });
+
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -143,21 +150,27 @@ async function uploadCanvasData(url, canvas) {
     }
     return response.text(); //.json(); // or `response.text()` if your server sends a text response
 }
-const kri_upload = document.getElementById("kri-upload");
-kri_upload.addEventListener("click", function () {
+
+const kri_upload = document.getElementById("kri-upload")!;
+kri_upload.addEventListener("click", function() {
     const canvas = croquis.getLayerCanvas(1);
     uploadCanvasData("/upload-canvas", canvas)
         .then(data => console.log('Success:', data))
         .catch(error => console.error('Error:', error));
-});
-const kri_load = document.getElementById("kri-load");
-kri_load.addEventListener("click", function () {
+})
+
+
+
+const kri_load = document.getElementById("kri-load")!;
+kri_load.addEventListener("click", function() {
     const canvas = croquis.getLayerCanvas(1);
     const ctx = canvas.getContext("2d");
+
     const img = new Image();
-    img.onload = function () {
+    img.onload = function() {
         ctx.drawImage(img, 0, 0);
     };
     img.src = "/assets/layer-1.png";
-});
+})
+*/ 
 //# sourceMappingURL=mycroquis.js.map

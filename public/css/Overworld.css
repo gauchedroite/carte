@@ -38,8 +38,19 @@ body, html {
     grid-row: 2;
 }
 
-canvas {
+#tablet_api {
+    position: absolute;
+    top: -1000px;
+}
+
+#canvas_area {
     width: 405px;
     height: 675px;
-    border: 1px solid black;
+    display: inline-block;
+    cursor: crosshair;
 }
+
+.croquis-dirty-rect-display {
+    touch-action: none;
+}
+
