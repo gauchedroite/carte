@@ -6,7 +6,7 @@ body {
     -moz-user-select: none;
 }
 
-#tablet-api {
+#tablet_api {
     position: absolute;
     top: -1000px;
 }

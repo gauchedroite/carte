@@ -10,9 +10,11 @@ const port = 9340;
 // Set paths
 const publicPath = path.join(__dirname, "../public");
 const assetsPath = path.join(__dirname, "../public/assets");
+const srcPath = path.join(__dirname, "../src");
 
-// Configure express
+// Configure express virtual folders
 app.use(express.static(publicPath));
+app.use("/src", express.static(srcPath));
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: "50mb" }));
