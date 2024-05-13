@@ -1,7 +1,10 @@
 :root {
-    --bg-color: #666;
-    --fade-in: 0.75s;
-    --fade-out: 0.25s;
+    --canvas-width: 405px;
+    --canvas-height: 675px;
+    --bg-color: #aaa;
+    --box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+    --box-shadow-2: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    --tools-width: 200px;
 }
 
 * {
@@ -25,12 +28,12 @@ body, html {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr var(--canvas-width) 1fr;
+    grid-template-rows: 1fr var(--canvas-height) 1fr;
     width: 100%;
     height: 100%;
     justify-items: center;
-    align-items: center;
+    align-items: start;
 }
 
 .center-canvas {
@@ -38,16 +41,76 @@ body, html {
     grid-row: 2;
 }
 
+.left-tools {
+    grid-column: 1;
+    grid-row: 2;
+
+    width: calc(var(--tools-width) + 1rem);
+    justify-self: end;
+    margin-right: 2rem;
+    box-shadow: var(--box-shadow-2);
+    padding: 0.5rem;
+    background-color: white;;
+
+    .tools-nav div {
+        display: inline-block;
+    }
+
+    .color-cells {
+        display: flex;
+        flex-wrap: wrap;
+        & > div {
+            width: 50px;
+            height: 50px;
+            background-color: lime;
+         }
+    }
+
+    .pinceau-cells {
+        display: flex;
+        & > div {
+            width: 33%;
+            height: 50px;
+            background-color: yellow;
+         }
+    }
+
+    .size-cells {
+        display: flex;
+        & > div {
+            width: 33%;
+            height: 50px;
+            background-color: lime;
+         }
+    }
+
+    .opacity-cells {
+        display: flex;
+        & > div {
+            width: 33%;
+            height: 50px;
+            background-color: yellow;
+         }
+    }
+
+    .selected {
+        border: 4px solid #00000010;
+    }
+}
+
+
+
 #tablet_api {
     position: absolute;
     top: -1000px;
 }
 
 #canvas_area {
-    width: 405px;
-    height: 675px;
+    width: --canvas-width;
+    height: --canvas-height;
     display: inline-block;
     cursor: crosshair;
+    box-shadow: var(--box-shadow);
 }
 
 .croquis-dirty-rect-display {

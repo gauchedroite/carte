@@ -1,8 +1,11 @@
 "use strict";
+const body_style = getComputedStyle(document.body);
+const canvas_width = body_style.getPropertyValue('--canvas-width').replace("px", "");
+const canvas_height = body_style.getPropertyValue('--canvas-height').replace("px", "");
 // Initialize croquis
 var croquis = new Croquis();
 croquis.lockHistory();
-croquis.setCanvasSize(405, 675);
+croquis.setCanvasSize(canvas_width, canvas_height);
 croquis.addLayer();
 croquis.fillLayer('#fff');
 croquis.addLayer();

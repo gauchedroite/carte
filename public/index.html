@@ -17,11 +17,53 @@
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body unselectable="on">
-    <object id="tablet_api" type="application/x-wacomtabletplugin"></object>
+    <object id="tablet_api" type="application/x-wacomtabletplugin" title="Tablet API"></object>
 
     <div class="grid-container">
+        <div class="left-tools">
+            <div class="tools-nav">
+                <div>Undo</div><div>Redo</div>
+            </div>
+            <div class="tools-color">
+                <div>Couleurs</div>
+                <div class="color-cells">
+                    <div id="cell_black"></div>
+                    <div id="cell_viridian_blue" class="selected"></div>
+                    <div id="cell_burnt_sienna"></div>
+                    <div id="cell_ultramarine_blue"></div>
+                    <div id="cell_white"></div>
+                    <div id="cell_cadmium_yellow"></div>
+                    <div id="cell_alizarin_crimson"></div>
+                    <div id="cell_raw_umber"></div>
+                </div>
+            </div>
+            <div class="tools-pinceau">
+                <div>Pinceau</div>
+                <div class="pinceau-cells">
+                    <div id="cell_round" class="selected"></div>
+                    <div id="cell_heart"></div>
+                    <div id="cell_bar"></div>
+                </div>
+            </div>
+            <div class="tools-size">
+                <div>Dimension du pinceau</div>
+                <div class="size-cells">
+                    <div id="cell_small"></div>
+                    <div id="cell_medium" class="selected"></div>
+                    <div id="cell_big"></div>
+                </div>
+            </div>
+            <div class="tools-opacity">
+                <div>Opacité du pinceau</div>
+                <div class="opacity-cells">
+                    <div id="cell_low"></div>
+                    <div id="cell_mid"></div>
+                    <div id="cell_full" class="selected"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="center-canvas">
-            <!-- <canvas id="card_canvas"></canvas> -->
             <div id="canvas_area"></div>
         </div>
     </div>
