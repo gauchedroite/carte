@@ -27,38 +27,52 @@
             <div class="tools-color">
                 <div class="tool-section">Couleurs</div>
                 <div class="color-cells">
-                    <div id="cell_black"></div>
-                    <div id="cell_viridian_blue" class="selected"></div>
-                    <div id="cell_burnt_sienna"></div>
-                    <div id="cell_ultramarine_blue"></div>
-                    <div id="cell_white"></div>
-                    <div id="cell_cadmium_yellow"></div>
-                    <div id="cell_alizarin_crimson"></div>
-                    <div id="cell_raw_umber"></div>
+                    <div id="cell_black" style="background-color: black;"></div>
+                    <div id="cell_viridian_green" style="background-color: rgb(64, 130, 109);"></div>
+                    <div id="cell_burnt_sienna" style="background-color: rgb(233, 116, 81);"></div>
+                    <div id="cell_ultramarine_blue" style="background-color: rgb(18, 10, 143);"></div>
+                    <div id="cell_white" style="background-color: white;" class="selected"></div>
+                    <div id="cell_cadmium_yellow" style="background-color: rgb(255, 246, 0);"></div>
+                    <div id="cell_alizarin_crimson" style="background-color: rgb(227, 38, 54);"></div>
+                    <div id="cell_raw_umber" style="background-color: rgb(115, 74, 18);"></div>
                 </div>
             </div>
             <div class="tools-pinceau">
                 <div class="tool-section">Pinceau</div>
                 <div class="pinceau-cells">
-                    <div id="cell_round"></div>
-                    <div id="cell_heart" class="selected"><img src="images/b0.png" class="brush-image"></div>
+                    <div id="cell_round" class="selected">
+                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
+                    </div>
+                    <div id="cell_heart"><img src="images/b0.png" class="brush-image"></div>
                     <div id="cell_bar"><img src="images/b4.png" class="brush-image"></div>
                 </div>
             </div>
             <div class="tools-size">
                 <div class="tool-section">Dimension du pinceau</div>
                 <div class="size-cells">
-                    <div id="cell_small"></div>
-                    <div id="cell_medium" class="selected"></div>
-                    <div id="cell_big"></div>
+                    <div id="cell_small">
+                        <svg height="50" width="50"><circle r="6" cx="25" cy="20" fill="#333" /></svg>
+                    </div>
+                    <div id="cell_medium" class="selected">
+                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
+                    </div>
+                    <div id="cell_big">
+                        <svg height="50" width="50"><circle r="18" cx="25" cy="20" fill="#333" /></svg>
+                    </div>
                 </div>
             </div>
             <div class="tools-opacity">
                 <div class="tool-section">Opacité du pinceau</div>
                 <div class="opacity-cells">
-                    <div id="cell_low"></div>
-                    <div id="cell_mid"></div>
-                    <div id="cell_full" class="selected"></div>
+                    <div id="cell_low">
+                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" fill-opacity="0.1" /></svg>
+                    </div>
+                    <div id="cell_mid">
+                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" fill-opacity="0.4" /></svg>
+                    </div>
+                    <div id="cell_full" class="selected">
+                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
+                    </div>
                 </div>
             </div>
         </div>
