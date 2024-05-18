@@ -1,4 +1,4 @@
-import Overworld from "./Overworld.js"
+import { tools } from "./tools.js"
 
+tools.initialize();
 
-//Overworld.initialize(document.querySelector(".grid-container") as HTMLElement, 405, 675)

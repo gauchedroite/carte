@@ -17,12 +17,17 @@
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body unselectable="on">
-    <object id="tablet_api" type="application/x-wacomtabletplugin" title="Tablet API"></object>
+    <object id="tablet_api" type="application/x-wacomtabletplugin"></object>
 
     <div class="grid-container">
         <div class="left-tools">
             <div class="tools-nav">
-                <div>Undo</div><div>Redo</div>
+                <button type="button" id="undo" class="imperfect">
+                    <img src="./images/undo.svg" title="undo" width="20" height="15" >
+                </button>
+                <button type="button" id="redo" class="imperfect">
+                    <img src="./images/redo.svg" title="undo" width="20" height="15" >
+                </button>
             </div>
             <div class="tools-color">
                 <div class="tool-section">Couleurs</div>
@@ -37,41 +42,39 @@
                     <div id="cell_raw_umber" style="background-color: rgb(115, 74, 18);"></div>
                 </div>
             </div>
-            <div class="tools-pinceau">
+            <div class="tools-brush">
                 <div class="tool-section">Pinceau</div>
-                <div class="pinceau-cells">
-                    <div id="cell_round" class="selected">
-                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
-                    </div>
-                    <div id="cell_heart"><img src="images/b0.png" class="brush-image"></div>
-                    <div id="cell_bar"><img src="images/b4.png" class="brush-image"></div>
+                <div class="brush-cells">
+                    <div id="cell_round" class="selected" style="padding:7px 0 0 20px;"><img src="./images/imperfect-circle.svg" title="brush" width="25" height="25" ></div>
+                    <div id="cell_heart"><img src="images/b0.png" title="brush" height="40"></div>
+                    <div id="cell_bar"><img src="images/b4.png" title="brush" height="40"></div>
                 </div>
             </div>
             <div class="tools-size">
                 <div class="tool-section">Dimension du pinceau</div>
                 <div class="size-cells">
-                    <div id="cell_small">
-                        <svg height="50" width="50"><circle r="6" cx="25" cy="20" fill="#333" /></svg>
+                    <div id="cell_small" style="padding:10px 0 0 24px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="15" height="15" >
                     </div>
-                    <div id="cell_medium" class="selected">
-                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
+                    <div id="cell_medium" style="padding:7px 0 0 20px;" class="selected">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" >
                     </div>
                     <div id="cell_big">
-                        <svg height="50" width="50"><circle r="18" cx="25" cy="20" fill="#333" /></svg>
+                        <img src="./images/imperfect-circle.svg" title="circle" width="40" height="40">
                     </div>
                 </div>
             </div>
             <div class="tools-opacity">
                 <div class="tool-section">Opacité du pinceau</div>
                 <div class="opacity-cells">
-                    <div id="cell_low">
-                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" fill-opacity="0.1" /></svg>
+                    <div id="cell_low" style="padding:7px 0 0 20px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" style="opacity:0.1;">
                     </div>
-                    <div id="cell_mid">
-                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" fill-opacity="0.4" /></svg>
+                    <div id="cell_mid" style="padding:7px 0 0 20px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" style="opacity:0.4;">
                     </div>
-                    <div id="cell_full" class="selected">
-                        <svg height="50" width="50"><circle r="12" cx="25" cy="20" fill="#333" /></svg>
+                    <div id="cell_full" style="padding:7px 0 0 20px;" class="selected">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" >
                     </div>
                 </div>
             </div>
@@ -83,8 +86,6 @@
     </div>
 
     <script src="./lib/croquis.js"></script>
-    <script src="./js/mycroquis.js"></script>
-
-    <!-- <script type="module" src="./js/index.js"></script> -->
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>

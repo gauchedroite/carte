@@ -1,3 +1,3 @@
-export {};
-//Overworld.initialize(document.querySelector(".grid-container") as HTMLElement, 405, 675)
+import { tools } from "./tools.js";
+tools.initialize();
 //# sourceMappingURL=index.js.map

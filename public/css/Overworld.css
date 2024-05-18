@@ -18,8 +18,7 @@ body, html {
     width: 100%;
     padding: 0;
     margin: 0;
-    font-family: 'Klee One';
-    font-weight: 500;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,60 +41,6 @@ body, html {
 .center-canvas {
     grid-column: 2;
     grid-row: 2;
-}
-
-.left-tools {
-    grid-column: 1;
-    grid-row: 2;
-
-    width: calc(var(--tools-width) + 1rem);
-    justify-self: end;
-    margin-right: 2rem;
-    box-shadow: var(--box-shadow-2);
-    padding: 0.5rem;
-    background-color: var(--tools-bg-color);
-
-    .tools-nav div {
-        display: inline-block;
-    }
-
-    .tool-section {
-        margin: 1rem 0 0.25rem 0;
-        border-bottom: 1px solid #aaa;
-    }
-
-    .color-cells {
-        display: flex;
-        flex-wrap: wrap;
-        div {
-            width: 50px;
-            height: 50px;
-            border: 8px solid var(--tools-bg-color);
-         }
-
-         .selected {
-            border: 8px solid transparent;
-        }
-    }
-
-    .pinceau-cells, .size-cells, .opacity-cells {
-        display: flex;
-        div {
-            width: 33%;
-            height: 50px;
-            padding-left: 10px;
-            border-bottom: 4px solid var(--tools-bg-color);
-         }
-
-         .brush-image {
-            height: 40px;
-            width: auto;
-         }
-         
-         .selected {
-            border-bottom: 3px dotted #666;
-        }    
-    }
 }
 
 

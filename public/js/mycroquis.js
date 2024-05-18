@@ -1,9 +1,35 @@
-"use strict";
 const body_style = getComputedStyle(document.body);
 const canvas_width = body_style.getPropertyValue('--canvas-width').replace("px", "");
 const canvas_height = body_style.getPropertyValue('--canvas-height').replace("px", "");
+export class MyCroquis {
+    brushImagePointerDown(image, isDefaultBrush) {
+        currentBrush = image;
+        brush.setImage(isDefaultBrush ? null : image);
+        this.updatePointer(isDefaultBrush);
+    }
+    updatePointer(isDefaultBrush) {
+        if (pointerEventsNone) {
+            var image = currentBrush;
+            var threshold;
+            if (isDefaultBrush) {
+                image = null;
+                threshold = 0xff;
+            }
+            else {
+                threshold = 0x30;
+            }
+            var brushPointer = Croquis.createBrushPointer(image, brush.getSize(), brush.getAngle(), threshold, true);
+            brushPointer.style.setProperty('margin-left', '-' + (brushPointer.width * 0.5) + 'px');
+            brushPointer.style.setProperty('margin-top', '-' + (brushPointer.height * 0.5) + 'px');
+            brushPointerContainer.innerHTML = '';
+            brushPointerContainer.appendChild(brushPointer);
+        }
+    }
+}
+export const myCroquis = new MyCroquis();
+// https://labs.crosspop.in/Croquispop/croquispop.html
 // Initialize croquis
-var croquis = new Croquis();
+const croquis = new Croquis();
 croquis.lockHistory();
 croquis.setCanvasSize(canvas_width, canvas_height);
 croquis.addLayer();
@@ -13,7 +39,7 @@ croquis.addLayer();
 croquis.selectLayer(1);
 croquis.unlockHistory();
 var brush = new Croquis.Brush();
-brush.setSize(4);
+brush.setSize(40);
 brush.setColor('#000');
 brush.setSpacing(0.2);
 croquis.setTool(brush);

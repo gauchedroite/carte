@@ -1,20 +1,15 @@
-export default class Overworld {
-    constructor() { }
-    // Getters
-    static get width() { return Overworld._width; }
-    static get height() { return Overworld._height; }
-    static get container() { return Overworld._container; }
-    static get canvas() { return Overworld._canvas; }
-    static get ctx() { return Overworld._ctx; }
-    // Initialize the game
-    static initialize(container, width, height) {
-        this._width = width;
-        this._height = height;
-        this._container = container;
-        this._canvas = container.querySelector(".center-canvas canvas");
-        this._ctx = this._canvas.getContext("2d");
-        this._canvas.width = width;
-        this._canvas.height = height;
+export class Tools {
+    initialize() {
+        const tools = document.querySelector(".left-tools");
+        const undo = document.getElementById("undo");
+        undo.addEventListener("click", function () {
+            console.log("undo");
+        });
+        const redo = document.getElementById("redo");
+        redo.addEventListener("click", function () {
+            console.log("redo");
+        });
     }
 }
+export const tools = new Tools();
 //# sourceMappingURL=Overworld.js.map

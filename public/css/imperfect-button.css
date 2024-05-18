@@ -1,0 +1,54 @@
+
+button.imperfect {
+    --bc: #666;
+    
+    font-family: inherit;
+    font-size: 1em;
+
+    align-self: center;
+    transition: all .5s ease;
+    outline: none;
+    box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
+
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    /*
+    Above is shorthand for:
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    border-bottom-right-radius: 225px 15px;
+    border-bottom-left-radius:15px 255px;
+    */
+
+    /* Defaults to lined.thin */
+    border: solid 2px var(--bc);
+
+
+    &:hover {
+        box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, .3);
+    }
+
+
+    &.lined.thick {
+        border: solid 7px var(--bc);
+    }
+
+    &.dotted.thick {
+        border: dotted 5px var(--bc);
+    }
+
+    &.dashed.thick {
+        border: dashed 5px var(--bc);
+    }
+
+    &.lined.thin {
+        border: solid 2px var(--bc);
+    }
+
+    &.dotted.thin {
+        border: dotted 2px var(--bc);
+    }
+
+    &.dashed.thin {
+        border: dashed 2px var(--bc);
+    }
+}

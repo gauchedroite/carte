@@ -1,11 +1,5 @@
+@import "./fonts.css";
 @import "./Overworld.css";
+@import "./imperfect-button.css";
+@import "./tools.css";
 /*@import "./carte.css";*/
-
-/* klee-one-regular - latin */
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Klee One';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../webfonts/klee-one-v7-latin-regular.woff2') format('woff2');
-  }
