@@ -8,12 +8,12 @@ export class Tools {
 
         const undo = document.getElementById("undo")!;
         undo.addEventListener("click", function () {
-            console.log("undo")
+            my.undo()
         })
 
         const redo = document.getElementById("redo")!;
         redo.addEventListener("click", function () {
-            console.log("redo")
+            my.redo()
         })
 
         const color_cells = document.querySelector(".color-cells")!;
@@ -24,6 +24,8 @@ export class Tools {
                 selected?.classList.remove("selected")
                 const cell = event.target as HTMLDivElement
                 cell.classList.add("selected")
+
+                my.updateColor(cell.style.backgroundColor)
             })
         })
 
@@ -49,6 +51,10 @@ export class Tools {
                 const selected = size_cells.querySelector(".selected")
                 selected?.classList.remove("selected")
                 element.classList.add("selected")
+
+                const id = element.id
+                const px = id == "cell_small" ? 10 : id == "cell_medium" ? 30 : 50
+                my.updateSize(px)
             })
         })
 
@@ -59,6 +65,10 @@ export class Tools {
                 const selected = opacity_cells.querySelector(".selected")
                 selected?.classList.remove("selected")
                 element.classList.add("selected")
+
+                const id = element.id
+                const alpha = id == "cell_low" ? 10 : id == "cell_mid" ? 40 : 100
+                my.updateOpacity(alpha / 100)
             })
         })
     }

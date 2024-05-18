@@ -18,12 +18,27 @@ export class MyCroquis {
             else {
                 threshold = 0x30;
             }
-            var brushPointer = Croquis.createBrushPointer(image, brush.getSize(), brush.getAngle(), threshold, true);
-            brushPointer.style.setProperty('margin-left', '-' + (brushPointer.width * 0.5) + 'px');
-            brushPointer.style.setProperty('margin-top', '-' + (brushPointer.height * 0.5) + 'px');
-            brushPointerContainer.innerHTML = '';
-            brushPointerContainer.appendChild(brushPointer);
+            // var brushPointer = Croquis.createBrushPointer(image, brush.getSize(), brush.getAngle(), threshold, true);
+            // brushPointer.style.setProperty('margin-left', '-' + (brushPointer.width * 0.5) + 'px');
+            // brushPointer.style.setProperty('margin-top', '-' + (brushPointer.height * 0.5) + 'px');
+            // brushPointerContainer.innerHTML = '';
+            // brushPointerContainer.appendChild(brushPointer);
         }
+    }
+    updateColor(rgb) {
+        brush.setColor(rgb);
+    }
+    updateSize(px) {
+        brush.setSize(px);
+    }
+    updateOpacity(alpha) {
+        croquis.setPaintingOpacity(alpha);
+    }
+    undo() {
+        croquis.undo();
+    }
+    redo() {
+        croquis.redo();
     }
 }
 export const myCroquis = new MyCroquis();
@@ -39,7 +54,7 @@ croquis.addLayer();
 croquis.selectLayer(1);
 croquis.unlockHistory();
 var brush = new Croquis.Brush();
-brush.setSize(40);
+brush.setSize(23);
 brush.setColor('#000');
 brush.setSpacing(0.2);
 croquis.setTool(brush);
@@ -100,26 +115,26 @@ function brushImagePointerDown(e) {
 // checking pointer-events property support
 var pointerEventsNone = document.documentElement.style.pointerEvents !== undefined;
 //brush pointer
-var brushPointerContainer = document.createElement('div');
-brushPointerContainer.className = 'brush-pointer';
-if (pointerEventsNone) {
-    croquisDOMElement.addEventListener('pointerover', function () {
-        croquisDOMElement.addEventListener('pointermove', croquisPointerMove);
-        document.body.appendChild(brushPointerContainer);
-    });
-    croquisDOMElement.addEventListener('pointerout', function () {
-        croquisDOMElement.removeEventListener('pointermove', croquisPointerMove);
-        brushPointerContainer.parentElement.removeChild(brushPointerContainer);
-    });
-}
-function croquisPointerMove(e) {
-    if (pointerEventsNone) {
-        var x = e.clientX + window.pageXOffset;
-        var y = e.clientY + window.pageYOffset;
-        brushPointerContainer.style.setProperty('left', x + 'px');
-        brushPointerContainer.style.setProperty('top', y + 'px');
-    }
-}
+//var brushPointerContainer = document.createElement('div')!;
+//brushPointerContainer.className = 'brush-pointer';
+// if (pointerEventsNone) {
+//     croquisDOMElement.addEventListener('pointerover', function () {
+//         croquisDOMElement.addEventListener('pointermove', croquisPointerMove);
+//         document.body.appendChild(brushPointerContainer);
+//     });
+//     croquisDOMElement.addEventListener('pointerout', function () {
+//         croquisDOMElement.removeEventListener('pointermove', croquisPointerMove);
+//         brushPointerContainer.parentElement!.removeChild(brushPointerContainer);
+//     });
+// }
+// function croquisPointerMove(e: any) {
+//     if (pointerEventsNone) {
+//         var x = e.clientX + window.pageXOffset;
+//         var y = e.clientY + window.pageYOffset;
+//         brushPointerContainer.style.setProperty('left', x + 'px');
+//         brushPointerContainer.style.setProperty('top', y + 'px');
+//     }
+// }
 function updatePointer() {
     if (pointerEventsNone) {
         var image = currentBrush;
@@ -131,11 +146,11 @@ function updatePointer() {
         else {
             threshold = 0x30;
         }
-        var brushPointer = Croquis.createBrushPointer(image, brush.getSize(), brush.getAngle(), threshold, true);
-        brushPointer.style.setProperty('margin-left', '-' + (brushPointer.width * 0.5) + 'px');
-        brushPointer.style.setProperty('margin-top', '-' + (brushPointer.height * 0.5) + 'px');
-        brushPointerContainer.innerHTML = '';
-        brushPointerContainer.appendChild(brushPointer);
+        // var brushPointer = Croquis.createBrushPointer(image, brush.getSize(), brush.getAngle(), threshold, true);
+        // brushPointer.style.setProperty('margin-left', '-' + (brushPointer.width * 0.5) + 'px');
+        // brushPointer.style.setProperty('margin-top', '-' + (brushPointer.height * 0.5) + 'px');
+        // brushPointerContainer.innerHTML = '';
+        // brushPointerContainer.appendChild(brushPointer);
     }
 }
 updatePointer();
