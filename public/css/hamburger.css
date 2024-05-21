@@ -1,0 +1,131 @@
+#hamburger {
+
+    & svg {
+        fill: currentColor;
+        stroke: currentColor;
+        width: 20px;
+        height: 20px;
+    }
+
+    /*
+ * Hamburger lines reset animation, i.e. menu closed
+ */
+    & svg path {
+        transform-origin: 50% 8px;
+        transition: stroke 0.3s ease-in-out, fill 0.3s ease-in-out;
+    }
+
+    & svg path:nth-of-type(1) {
+        animation: hamburgerTopReset 300ms ease-in-out forwards;
+    }
+
+    & svg path:nth-of-type(2) {
+        transform-origin: 50% 15px;
+        animation: hamburgerMiddleReset 300ms ease-in-out forwards;
+    }
+
+    & svg path:nth-of-type(3) {
+        transform-origin: 50% 22px;
+        animation: hamburgerBottomReset 300ms ease-in-out forwards;
+    }
+
+    /*
+ * Hamburger turns into X, i.e. menu open
+ */
+    &.opened svg path:nth-of-type(1) {
+        animation: hamburgerTopDeform 300ms ease-in-out forwards;
+    }
+
+    &.opened svg path:nth-of-type(2) {
+        animation: hamburgerMiddleDeform 300ms ease-in-out forwards;
+    }
+
+    &.opened svg path:nth-of-type(3) {
+        animation: hamburgerBottomDeform 300ms ease-in-out forwards;
+    }
+}
+
+
+@keyframes hamburgerTopReset {
+    0% {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    50% {
+        transform: translateY(7px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes hamburgerMiddleReset {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hamburgerBottomReset {
+    0% {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes hamburgerTopDeform {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(7px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(7px) rotate(45deg);
+    }
+}
+
+@keyframes hamburgerMiddleDeform {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes hamburgerBottomDeform {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}

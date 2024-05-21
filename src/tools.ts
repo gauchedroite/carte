@@ -4,7 +4,11 @@ const my = myCroquis;
 
 
 export class Tools {
+    initialized = false;
+
     public initialize() {
+        if (this.initialized)
+            return;
 
         const undo = document.getElementById("undo")!;
         undo.addEventListener("click", function () {

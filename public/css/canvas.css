@@ -1,0 +1,9 @@
+
+#tablet_api {
+    position: absolute;
+    top: -1000px;
+}
+
+.croquis-dirty-rect-display {
+    touch-action: none;
+}

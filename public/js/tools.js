@@ -1,7 +1,12 @@
 import { myCroquis } from "./mycroquis.js";
 const my = myCroquis;
 export class Tools {
+    constructor() {
+        this.initialized = false;
+    }
     initialize() {
+        if (this.initialized)
+            return;
         const undo = document.getElementById("undo");
         undo.addEventListener("click", function () {
             my.undo();

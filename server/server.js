@@ -10,6 +10,7 @@ const port = 9340;
 // Set paths
 const publicPath = path.join(__dirname, "../public");
 const assetsPath = path.join(__dirname, "../public/assets");
+const dataPath = path.join(__dirname, "../public/data");
 const srcPath = path.join(__dirname, "../src");
 
 // Configure express virtual folders

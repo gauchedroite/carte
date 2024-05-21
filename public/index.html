@@ -17,10 +17,10 @@
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body unselectable="on">
-    <object id="tablet_api" type="application/x-wacomtabletplugin"></object>
 
     <div class="grid-container">
-        <div class="left-tools">
+
+        <div class="left-tools" style="display:none">
             <div class="tools-nav">
                 <button type="button" id="undo" class="imperfect">
                     <img src="./images/undo.svg" title="undo" width="20" height="15" >
@@ -30,7 +30,7 @@
                 </button>
             </div>
             <div class="tools-color">
-                <div class="tool-section">Couleurs</div>
+                <div class="tool-section">Palette de couleurs</div>
                 <div class="color-cells">
                     <div id="cell_black" style="background-color: rgb(0, 0, 0);" class="selected"></div>
                     <div id="cell_viridian_green" style="background-color: rgb(64, 130, 109);"></div>
@@ -81,7 +81,53 @@
         </div>
 
         <div class="center-canvas">
-            <div id="canvas_area"></div>
+            <div class="menu-panel">
+                <div class="menu-content">
+                    <div id="hamburger" class="menu-top">
+                        <svg width="30" height="30" viewBox="0 0 30 30">
+                            <path stroke-width="2" d="M4 8 L26 8"></path>
+                            <path stroke-width="2" d="M4 15 L26 15"></path>
+                            <path stroke-width="2" d="M4 22 L26 22"></path>
+                        </svg>
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li>Ajouter un paquet</li>
+                            <li>asdad</li>
+                            <li>asdad</li>
+                            <li>asdad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page_area">
+                <div id="paquets" style="display:none;">
+                    <div class="title"><span>Les paquets</span></div>
+                    <ul class="paquet-list">
+                        <li class="success"><div>Animaux</div></li>
+                        <li class="success"><div>Choses</div></li>
+                        <li><div>Pas essayé aujourd'hui</div></li>
+                        <li class="fail selected"><div>Difficile</div></li>
+                    </ul>
+                </div>
+                <div id="paquet">
+                    <div class="title"><span>Animaux</span></div>
+                    <div class="subtitle">Il y a 7 cartes</div>
+                    <div class="card-list">
+                        <div class="success"><div>1</div></div>
+                        <div class="success selected"><div>2</div></div>
+                        <div><div>3</div></div>
+                        <div class="fail"><div>4</div></div>
+                        <div class="success"><div>5</div></div>
+                        <div class="success"><div>6</div></div>
+                        <div class="success"><div>7</div></div>
+                    </div>
+                    <div class="bravo">Bravo pour ta réussite!</div>
+                </div>
+            </div>
+
+            <div id="canvas_area" style="display:none"></div>
         </div>
     </div>
 
