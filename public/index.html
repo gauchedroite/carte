@@ -23,10 +23,10 @@
         <div class="left-tools" style="display:none">
             <div class="tools-nav">
                 <button type="button" id="undo" class="imperfect">
-                    <img src="./images/undo.svg" title="undo" width="20" height="15" >
+                    <img src="./icones/undo.svg" title="undo" width="20" height="15" >
                 </button>
                 <button type="button" id="redo" class="imperfect">
-                    <img src="./images/redo.svg" title="undo" width="20" height="15" >
+                    <img src="./icones/redo.svg" title="undo" width="20" height="15" >
                 </button>
             </div>
             <div class="tools-color">
@@ -92,17 +92,15 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li>Ajouter un paquet</li>
-                            <li>asdad</li>
-                            <li>asdad</li>
-                            <li>asdad</li>
+                            <li id="menu_add_pack"><div>Ajouter un paquet</div></li>
                         </ul>
+                        <div class="imperfect-horizontal-line"></div>
                     </div>
                 </div>
             </div>
 
             <div id="page_area">
-                <div id="paquets" style="display:none;">
+                <div id="paquets">
                     <div class="title"><span>Les paquets</span></div>
                     <ul class="paquet-list">
                         <li class="success"><div>Animaux</div></li>
@@ -111,7 +109,7 @@
                         <li class="fail selected"><div>Difficile</div></li>
                     </ul>
                 </div>
-                <div id="paquet">
+                <div id="paquet" style="display:none;">
                     <div class="title"><span>Animaux</span></div>
                     <div class="subtitle">Il y a 7 cartes</div>
                     <div class="card-list">

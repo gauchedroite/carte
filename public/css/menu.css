@@ -16,25 +16,37 @@
     
         .menu {
             position: absolute;
-            bottom: 0;
+            top: -300px;
             left: 0;
-            transition: top 0.25s ease-in-out;
+            transition: top 0.20s ease-in-out;
 
             width: 100%;
             z-index: -1;
-            background-color: yellow;
+            background-color: white;
             font-size: x-large;
 
-    
             & ul {
+                padding: 0.5rem 1rem 1.5rem 3rem;
                 margin: 0;
+                list-style: none;
+
+                & li {
+                    margin-bottom: 0.5rem;
+                    padding-left: 40px;
+                }
+
+                li#menu_add_pack {
+                    background-image: url("../icones/icone-plus.svg");
+                    background-size: 32px;
+                    background-repeat: no-repeat;
+                }
             }
         }
     }
 
     &.opened {
         .menu {
-            top: 0;
+            top: 35px;
         }
     }
 }

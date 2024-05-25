@@ -9,9 +9,9 @@
     height="3.36pt"
     viewBox="0 0 109.68 3.36">
 <defs/>
-<path id="shape0" transform="translate(1.16799974306488, -0.408001161655378)" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0" sodipodi:nodetypes="c"/>
-<path id="shape1" transform="translate(0.591999775749159, 1.43902521197465)" fill="none" stroke="#000000" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.296973C5.47223 -0.44924 11.3441 0.453431 18.112 0.392973" sodipodi:nodetypes="cc"/>
-<path id="shape2" transform="translate(19.2479987171402, 1.60063298826828)" fill="none" stroke="#000000" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.167366C11.1679 -0.312228 28.3278 0.391366 37.216 0.391366" sodipodi:nodetypes="cc"/>
-<path id="shape3" transform="translate(56.64, 1.83199871123891)" fill="none" stroke="#000000" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.256C5.5302 0.424662 13.8212 0.573846 22.192 0" sodipodi:nodetypes="cc"/>
-<path id="shape4" transform="translate(78.8319953361284, 1.44799873302846)" fill="none" stroke="#000000" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.448C13.9942 0.256402 20.3689 0.0233454 30.4 0" sodipodi:nodetypes="cc"/>
+<path id="shape0" transform="translate(1.16799974306488, -0.408001161655378)" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0" sodipodi:nodetypes="c"/>
+<path id="shape1" transform="translate(0.591999775749159, 1.43902521197465)" fill="none" stroke="currentColor" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.296973C5.47223 -0.44924 11.3441 0.453431 18.112 0.392973" sodipodi:nodetypes="cc"/>
+<path id="shape2" transform="translate(19.2479987171402, 1.60063298826828)" fill="none" stroke="currentColor" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.167366C11.1679 -0.312228 28.3278 0.391366 37.216 0.391366" sodipodi:nodetypes="cc"/>
+<path id="shape3" transform="translate(56.64, 1.83199871123891)" fill="none" stroke="currentColor" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.256C5.5302 0.424662 13.8212 0.573846 22.192 0" sodipodi:nodetypes="cc"/>
+<path id="shape4" transform="translate(78.8319953361284, 1.44799873302846)" fill="none" stroke="currentColor" stroke-width="1.0896" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0.448C13.9942 0.256402 20.3689 0.0233454 30.4 0" sodipodi:nodetypes="cc"/>
 </svg>
