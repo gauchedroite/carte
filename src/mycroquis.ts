@@ -6,6 +6,20 @@ const canvas_height = body_style.getPropertyValue('--canvas-height').replace("px
 
 
 export class MyCroquis {
+    initialized = false;
+
+    public initialize() {
+        if (this.initialized)
+            return;
+
+        const crayon = document.getElementById("menu_center")!
+
+        crayon.addEventListener("click", function (event: Event) {
+            const paquets_menu = document.querySelector(".left-tools")!
+            paquets_menu?.classList.toggle("opened")
+        });
+    }
+
     public brushImagePointerDown(image: HTMLImageElement, isDefaultBrush: boolean) {
         currentBrush = image;
         brush.setImage(isDefaultBrush ? null : image)

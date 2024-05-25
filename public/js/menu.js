@@ -5,11 +5,15 @@ export class Menu {
     initialize() {
         if (this.initialized)
             return;
-        const menu_panel = document.querySelector(".menu-panel");
         const burger = document.getElementById("hamburger");
         burger.addEventListener("click", function (event) {
             burger.classList.toggle("opened");
-            menu_panel.classList.toggle("opened");
+            const paquets_menu = document.querySelector("#body_paquets #paquets .menu");
+            paquets_menu === null || paquets_menu === void 0 ? void 0 : paquets_menu.classList.toggle("opened");
+            const paquet_menu = document.querySelector("#body_paquet #paquet .menu");
+            paquet_menu === null || paquet_menu === void 0 ? void 0 : paquet_menu.classList.toggle("opened");
+            const canvas_menu = document.querySelector("#canvas_area .menu");
+            canvas_menu === null || canvas_menu === void 0 ? void 0 : canvas_menu.classList.toggle("opened");
         });
     }
 }

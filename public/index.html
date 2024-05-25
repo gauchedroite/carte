@@ -16,11 +16,11 @@
     
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
-<body unselectable="on">
+<body unselectable="on" id="body_canvas">
 
     <div class="grid-container">
 
-        <div class="left-tools" style="display:none">
+        <div class="left-tools">
             <div class="tools-nav">
                 <button type="button" id="undo" class="imperfect">
                     <img src="./icones/undo.svg" title="undo" width="20" height="15" >
@@ -81,7 +81,7 @@
         </div>
 
         <div class="center-canvas">
-            <div class="menu-panel">
+            <div id="menu_area">
                 <div class="menu-content">
                     <div id="hamburger" class="menu-top">
                         <svg width="30" height="30" viewBox="0 0 30 30">
@@ -90,42 +90,69 @@
                             <path stroke-width="2" d="M4 22 L26 22"></path>
                         </svg>
                     </div>
-                    <div class="menu">
-                        <ul>
-                            <li id="menu_add_pack"><div>Ajouter un paquet</div></li>
-                        </ul>
-                        <div class="imperfect-horizontal-line"></div>
+                    <div id="menu_center">
+                        <img src="./icones/icone-edit.svg" title="Edit">
+                    </div>
+                    <div id="menu_right" class="success">
+                        <div>3/12</div>
                     </div>
                 </div>
             </div>
 
-            <div id="page_area">
-                <div id="paquets">
-                    <div class="title"><span>Les paquets</span></div>
-                    <ul class="paquet-list">
-                        <li class="success"><div>Animaux</div></li>
-                        <li class="success"><div>Choses</div></li>
-                        <li><div>Pas essayé aujourd'hui</div></li>
-                        <li class="fail selected"><div>Difficile</div></li>
+            <div class="page-area" id="paquets">
+                <div class="menu">
+                    <ul>
+                        <li id="paquets_add_pack"><span>Ajouter un paquet</span></li>
                     </ul>
+                    <div class="imperfect-horizontal-line"></div>
                 </div>
-                <div id="paquet" style="display:none;">
-                    <div class="title"><span>Animaux</span></div>
-                    <div class="subtitle">Il y a 7 cartes</div>
-                    <div class="card-list">
-                        <div class="success"><div>1</div></div>
-                        <div class="success selected"><div>2</div></div>
-                        <div><div>3</div></div>
-                        <div class="fail"><div>4</div></div>
-                        <div class="success"><div>5</div></div>
-                        <div class="success"><div>6</div></div>
-                        <div class="success"><div>7</div></div>
-                    </div>
-                    <div class="bravo">Bravo pour ta réussite!</div>
-                </div>
+                <div class="title"><span>Les paquets</span></div>
+                <ul class="paquet-list">
+                    <li class="success"><div>Animaux</div></li>
+                    <li class="success"><div>Choses</div></li>
+                    <li><div>Pas essayé aujourd'hui</div></li>
+                    <li class="fail selected"><div>Difficile</div></li>
+                </ul>
             </div>
 
-            <div id="canvas_area" style="display:none"></div>
+            <div class="page-area" id="paquet">
+                <div class="menu">
+                    <ul>
+                        <li id="paquet_add_card"><span>Ajouter une carte</span></li>
+                        <li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>
+                        <li id="paquet_delete_pack"><span>Détruire le paquet</span></li>
+                        <li id="paquet_goto_packs"><span>Aller à la liste de paquets</span></li>
+                    </ul>
+                    <div class="imperfect-horizontal-line"></div>
+                </div>
+                <div class="title"><span>Animaux</span></div>
+                <div class="subtitle">Il y a 7 cartes</div>
+                <div class="card-list">
+                    <div class="success"><div>1</div></div>
+                    <div class="success selected"><div>2</div></div>
+                    <div><div>3</div></div>
+                    <div class="fail"><div>4</div></div>
+                    <div class="success"><div>5</div></div>
+                    <div class="success"><div>6</div></div>
+                    <div class="success"><div>7</div></div>
+                </div>
+                <div class="bravo">Bravo pour ta réussite!</div>
+            </div>
+
+            <div id="canvas_area">
+                <div class="menu">
+                    <ul>
+                        <li id="canvas_edit"><span style="font-weight:600;">Dessiner sur la carte</span></li>
+                        <li id="canvas_add_card"><span>Ajouter une carte</span></li>
+                        <li id="canvas_delete_card"><span>Détruire la carte</span></li>
+                        <li id="canvas_goto_pack"><span>Aller au paquet</span></li>
+                        <li id="canvas_no_update"><span>Don't save edits</span></li>
+                        <li id="canvas_add_face"><span>Ajouter une face</span></li>
+                        <li id="canvas_delete_face"><span>Détruire la face</span></li>
+                    </ul>
+                    <div class="imperfect-horizontal-line"></div>
+                </div>
+            </div>
         </div>
     </div>
 

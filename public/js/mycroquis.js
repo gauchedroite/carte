@@ -2,6 +2,18 @@ const body_style = getComputedStyle(document.body);
 const canvas_width = body_style.getPropertyValue('--canvas-width').replace("px", "");
 const canvas_height = body_style.getPropertyValue('--canvas-height').replace("px", "");
 export class MyCroquis {
+    constructor() {
+        this.initialized = false;
+    }
+    initialize() {
+        if (this.initialized)
+            return;
+        const crayon = document.getElementById("menu_center");
+        crayon.addEventListener("click", function (event) {
+            const paquets_menu = document.querySelector(".left-tools");
+            paquets_menu === null || paquets_menu === void 0 ? void 0 : paquets_menu.classList.toggle("opened");
+        });
+    }
     brushImagePointerDown(image, isDefaultBrush) {
         currentBrush = image;
         brush.setImage(isDefaultBrush ? null : image);

@@ -3,11 +3,11 @@
     & svg {
         fill: currentColor;
         stroke: currentColor;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
     }
 
-    /*
+/*
  * Hamburger lines reset animation, i.e. menu closed
  */
     & svg path {
@@ -29,7 +29,7 @@
         animation: hamburgerBottomReset 300ms ease-in-out forwards;
     }
 
-    /*
+/*
  * Hamburger turns into X, i.e. menu open
  */
     &.opened svg path:nth-of-type(1) {
