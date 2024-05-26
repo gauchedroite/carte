@@ -50,37 +50,37 @@ html {
 }
 
 
-
-#body_paquets,
-#body_paquet,
-#body_carte {
+body {
+    #paquets,
+    #paquet,
     #kanvas {
         display: none;
     }
-    .left-tools {
+    
+    .left-tools,
+    #menu_center,
+    #menu_right {
         display: none;
-    }
-    #menu_center {
-        display: none;
-    }
+    }    
 }
 
 #body_paquets {
-    #paquet {
-        display: none;
+    #paquets {
+        display: block;
     }
 }
 
 #body_paquet {
-    #paquets {
-        display: none;
+    #paquet {
+        display: block;
     }
 }
 
 #body_kanvas {
-    .page-area {
-        display: none;
+    #kanvas {
+        display: block;
     }
+    
     .left-tools {
         display: none;
 
@@ -91,8 +91,10 @@ html {
     #menu_center {
         display: block;
     }
+    #menu_right {
+        display: block;
+    }
 }
-
 
 
 .page-area {
