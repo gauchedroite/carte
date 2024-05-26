@@ -63,9 +63,6 @@ html {
     #menu_center {
         display: none;
     }
-    #menu_right {
-        display: none;
-    }
 }
 
 #body_paquets {
@@ -92,9 +89,6 @@ html {
         }
     }
     #menu_center {
-        display: block;
-    }
-    #menu_right {
         display: block;
     }
 }

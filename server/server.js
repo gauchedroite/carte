@@ -16,10 +16,28 @@ const srcPath = path.join(__dirname, "../src");
 // Configure express virtual folders
 app.use(express.static(publicPath));
 app.use("/src", express.static(srcPath));
+///app.use(express.json());
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: "50mb" }));
 
+
+
+
+app.post("/not-used-readfile", (req, res) => {
+    const filename = req.body.filename;
+    const filePath = path.join(dataPath, filename);
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(`Error reading file from disk: ${err}`);
+            res.json({});
+        }
+        else {
+            res.json(JSON.parse(data));
+        }
+    });
+});
 
 app.post("/upload-canvas", async (req, res) => {
     //if (req.file && req.body.filename) {
