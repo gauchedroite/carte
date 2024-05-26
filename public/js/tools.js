@@ -63,6 +63,10 @@ export class Tools {
                 my.updateOpacity(alpha / 100);
             });
         });
+        const erase_all = document.getElementById("erase_all");
+        erase_all.addEventListener("click", function () {
+            my.eraseSurface();
+        });
     }
 }
 export const tools = new Tools();

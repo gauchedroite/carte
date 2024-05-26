@@ -22,6 +22,15 @@
         border-bottom: 1px solid #aaa;
     }
 
+    .tools-action {
+        .action-buttons {
+            margin: 0.5rem 0 0.25rem 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+    }
+
     .color-cells {
         display: flex;
         flex-wrap: wrap;
@@ -61,5 +70,9 @@
 
     #cell_bar {
         padding-left: 13px;
+    }
+
+    & button {
+        border-width: 3px;
     }
 }

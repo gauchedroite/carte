@@ -1,0 +1,29 @@
+button.oval {
+    border-radius: 47% 46% 60% 46%;
+    background-color: white;
+
+    border: 8px solid #eee;
+    padding: 0.5rem;
+    transition: box-shadow .25s ease;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 2px 4px 12px #ddd;
+    }
+
+    &.ov0 {
+        border-radius: 60% 42% 52% 50%;
+    }
+
+    &.ov1 {
+        border-radius: 60% 42% 52% 50%;
+    }
+
+    &.ov2 {
+        border-radius: 54% 53% 43% 49%;
+    }
+
+    &.ov3 {
+        border-radius: 57% 40% 52% 42%;
+    }
+}

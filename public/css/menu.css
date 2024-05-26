@@ -5,11 +5,11 @@
     top: 0;
     left: 0;
     z-index: 2;
+    background-color: var(--tools-bg-color);
 
     .menu-content {
         display: flex;
         justify-content: space-between;
-        background-color: white;
 
         .menu-top {
             padding: 0.25rem;
@@ -53,6 +53,7 @@
     width: 100%;
     z-index: 1;
     background-color: white;
+    background-color: var(--tools-bg-color);
     font-size: x-large;
 
     & ul {
@@ -75,7 +76,7 @@
 
         li#paquets_add_pack, li#paquet_add_card, #canvas_add_card, #canvas_add_face { background-image: url("../icones/icone-plus.svg"); }
         li#paquet_restart_pack { background-image: url("../icones/icone-redo.svg"); }
-        li#paquet_delete_pack, #canvas_delete_card, #canvas_delete_face { background-image: url("../icones/icone-delete.svg"); }
+        li#paquet_delete_pack, #canvas_delete_card, #canvas_delete_face { background-image: url("../icones/icone-trash.svg"); }
         li#paquet_goto_packs, #canvas_goto_pack { background-image: url("../icones/icone-back.svg"); }
         li#canvas_edit { background-image: url("../icones/icone-edit.svg"); }
     }

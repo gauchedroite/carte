@@ -52,6 +52,9 @@ export class MyCroquis {
     redo() {
         croquis.redo();
     }
+    eraseSurface() {
+        croquis.fillLayer("white");
+    }
 }
 export const myCroquis = new MyCroquis();
 // https://labs.crosspop.in/Croquispop/croquispop.html
@@ -73,7 +76,7 @@ croquis.setTool(brush);
 croquis.setToolStabilizeLevel(10);
 croquis.setToolStabilizeWeight(0.1); //(0.5);
 var croquisDOMElement = croquis.getDOMElement();
-var canvasArea = document.getElementById('canvas_area');
+var canvasArea = document.getElementById('canvas_surface');
 canvasArea.appendChild(croquisDOMElement);
 function canvasPointerDown(e) {
     setPointerEvent(e);

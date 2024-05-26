@@ -64,6 +64,10 @@ export class MyCroquis {
     public redo() {
         croquis.redo()
     }
+
+    public eraseSurface() {
+        croquis.fillLayer("white")
+    }
 }
 export const myCroquis = new MyCroquis();
 
@@ -92,7 +96,7 @@ croquis.setToolStabilizeWeight(0.1); //(0.5);
 
 
 var croquisDOMElement = croquis.getDOMElement();
-var canvasArea = document.getElementById('canvas_area')!;
+var canvasArea = document.getElementById('canvas_surface')!;
 canvasArea.appendChild(croquisDOMElement);
 function canvasPointerDown(e: any) {
     setPointerEvent(e);

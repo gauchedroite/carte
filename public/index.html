@@ -16,17 +16,17 @@
     
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
-<body unselectable="on" id="body_canvas">
+<body unselectable="on" id="body_kanvas">
 
     <div class="grid-container">
 
         <div class="left-tools">
             <div class="tools-nav">
-                <button type="button" id="undo" class="imperfect">
+                <button type="button" id="undo" class="oval">
                     <img src="./icones/undo.svg" title="undo" width="20" height="15" >
                 </button>
-                <button type="button" id="redo" class="imperfect">
-                    <img src="./icones/redo.svg" title="undo" width="20" height="15" >
+                <button type="button" id="redo" class="oval">
+                    <img src="./icones/redo.svg" title="redo" width="20" height="15" >
                 </button>
             </div>
             <div class="tools-color">
@@ -76,6 +76,14 @@
                     <div id="cell_full" style="padding:7px 0 0 20px;" class="selected">
                         <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" >
                     </div>
+                </div>
+            </div>
+            <div class="tools-action">
+                <div class="tool-section">&nbsp;</div>
+                <div class="action-buttons">
+                    <button type="button" id="erase_all" class="oval">
+                        <span>Tout effacer</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -139,7 +147,7 @@
                 <div class="bravo">Bravo pour ta réussite!</div>
             </div>
 
-            <div id="canvas_area">
+            <div id="kanvas">
                 <div class="menu">
                     <ul>
                         <li id="canvas_edit"><span style="font-weight:600;">Dessiner sur la carte</span></li>
@@ -151,6 +159,23 @@
                         <li id="canvas_delete_face"><span>Détruire la face</span></li>
                     </ul>
                     <div class="imperfect-horizontal-line"></div>
+                </div>
+                <div id="canvas_surface"></div>
+                <div class="footer">
+                    <button type="button" id="kanvas_undo" class="oval ov1">
+                        <img src="./icones/icone-previous2.svg" title="undo" width="50" height="50">
+                    </button>
+                    <button type="button" id="kanvas_redo" class="oval ov2">
+                        <img src="./icones/icone-next2.svg" title="redo" width="50" height="50">
+                    </button>
+                <!--
+                    <button type="button" id="kanvas_check" class="oval ov3">
+                        <img src="./icones/icone-check.svg" title="check" width="50" height="50">
+                    </button>
+                    <button type="button" id="kanvas_delete" class="oval">
+                        <img src="./icones/icone-delete.svg" title="delete" width="50" height="50">
+                    </button>
+                -->
                 </div>
             </div>
         </div>
