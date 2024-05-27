@@ -16,7 +16,7 @@
     
     <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
-<body unselectable="on" id="body_paquets">
+<body unselectable="on">
 
     <div class="grid-container">
 
@@ -115,11 +115,12 @@
                     <div class="imperfect-horizontal-line"></div>
                 </div>
                 <div class="title"><span>Les paquets</span></div>
-                <ul class="paquet-list">
-                    <li class="success"><div>Animaux</div></li>
+                <div id="paquets_empty">Il n'y a pas encore<br>de paquet.<br><br><div>Ajouter un paquet!</div></div>
+                <ul id="paquet_list">
+                    <!--<li class="success"><div>Animaux</div></li>
                     <li class="success"><div>Choses</div></li>
                     <li><div>Pas essayé aujourd'hui</div></li>
-                    <li class="fail selected"><div>Difficile</div></li>
+                    <li class="fail selected"><div>Difficile</div></li>-->
                 </ul>
             </div>
 

@@ -1,6 +1,6 @@
 
 export class Menu {
-    initialized = false;
+    private initialized = false;
 
     public initialize() {
         if (this.initialized)
@@ -23,6 +23,12 @@ export class Menu {
             const canvas_menu = document.querySelector("#body_kanvas #kanvas .menu")!
             canvas_menu?.classList.toggle("opened")
         });
+    }
+
+    public close() {
+        const burger = document.getElementById("hamburger")!
+        if (burger.classList.contains("opened"))
+            document.getElementById("hamburger")!.click();
     }
 }
 

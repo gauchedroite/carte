@@ -18,6 +18,11 @@ export class Menu {
             canvas_menu === null || canvas_menu === void 0 ? void 0 : canvas_menu.classList.toggle("opened");
         });
     }
+    close() {
+        const burger = document.getElementById("hamburger");
+        if (burger.classList.contains("opened"))
+            document.getElementById("hamburger").click();
+    }
 }
 export const menu = new Menu();
 //# sourceMappingURL=menu.js.map

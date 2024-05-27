@@ -1,3 +1,5 @@
+import { menu } from "./menu.js"
+import { emitEvent } from "./utils.js"
 
 interface IState {
     username: string
@@ -42,15 +44,28 @@ export class State {
         console.log(this.userdata)
     }
 
-    // public async initialize() {
-    //     return fetch("/readfile", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({ filename: "laura.json" })
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
-    // }
+    public goto(page: string, paquetName: string) {
+        menu.close();
+        setTimeout(() => {
+            document.body.id = `body_${page}`
+            emitEvent("render", { page })
+        }, 200);
+    }
+
+    public hasPaquet() {
+        return (this.userdata.pids?.length ?? 0) > 0
+    }
+
+    public addPaquet(name: string) {
+        if (this.userdata.pids == undefined)
+            this.userdata.pids = [];
+
+        this.userdata.pids.push(<Paquet>{
+            nom: name,
+            success: undefined,
+            cids: []
+        })
+    }
 }
 
 export const state = new State();
