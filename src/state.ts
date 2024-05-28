@@ -44,11 +44,11 @@ export class State {
         console.log(this.userdata)
     }
 
-    public goto(page: string, paquetName: string) {
+    public goto(page: string, paquetName: string | null = null) {
         menu.close();
         setTimeout(() => {
             document.body.id = `body_${page}`
-            emitEvent("render", { page })
+            emitEvent("render", { page, param: paquetName })
         }, 200);
     }
 

@@ -13,11 +13,11 @@ export class State {
         }
         console.log(this.userdata);
     }
-    goto(page) {
+    goto(page, paquetName = null) {
         menu.close();
         setTimeout(() => {
             document.body.id = `body_${page}`;
-            emitEvent("render", { page });
+            emitEvent("render", { page, param: paquetName });
         }, 200);
     }
     hasPaquet() {

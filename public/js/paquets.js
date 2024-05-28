@@ -2,20 +2,21 @@ import { state } from "./state.js";
 export class Paquets {
     constructor() {
         this.addPaquet = () => {
-            //state.goto("paquet");
             state.addPaquet("bonjour!");
             this.render();
         };
         this.gotoPaquet = (event) => {
-            if (event.target.nodeName != "DIV")
+            const element = event.target;
+            if (element.nodeName != "DIV")
                 return;
-            console.log(event);
+            state.goto("paquet", element.textContent);
         };
     }
     initialize() {
+        const me = this;
         document.getElementById("paquets_add_pack").addEventListener("click", this.addPaquet);
         document.querySelector("#paquets_empty div").addEventListener("click", this.addPaquet);
-        document.getElementById("paquet_list").addEventListener("click", this.gotoPaquet);
+        document.getElementById("paquet_list").addEventListener("click", (e) => this.gotoPaquet(e));
         document.addEventListener("render", (event) => {
             if (event.detail.page == "paquets")
                 this.render();

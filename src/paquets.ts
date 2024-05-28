@@ -3,9 +3,11 @@ import { state } from "./state.js";
 
 export class Paquets {
     public initialize() {
+        const me = this;
+
         document.getElementById("paquets_add_pack")!.addEventListener("click", this.addPaquet)
         document.querySelector("#paquets_empty div")!.addEventListener("click", this.addPaquet)
-        document.getElementById("paquet_list")!.addEventListener("click", this.gotoPaquet)
+        document.getElementById("paquet_list")!.addEventListener("click", (e) => this.gotoPaquet(e))
 
         document.addEventListener("render", (event: any) => {
             if (event.detail.page == "paquets")
@@ -34,11 +36,7 @@ export class Paquets {
         this.render();
     }
 
-    gotoPaquet = (event: Event) => {
-        if (event == undefined)
-            return;
-
-        debugger
+    gotoPaquet = (event: MouseEvent) => {
         const element = event.target as Element;
         if (element.nodeName != "DIV")
             return;
