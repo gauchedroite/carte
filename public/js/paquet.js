@@ -1,20 +1,36 @@
-import { state } from "./state.js";
-export class Paquet {
-    constructor() {
-        this.gotoPaquets = (event) => {
-            state.goto("paquets");
-        };
+import { getPaquet, goto, addCarteToPaquet } from "./state.js";
+let current_name;
+export const initialize = () => {
+    document.getElementById("paquet_goto_packs").addEventListener("click", gotoPaquets);
+    document.addEventListener("render", (event) => {
+        if (event.detail.page == "paquet") {
+            current_name = event.detail.param;
+            render();
+        }
+    });
+};
+const render = () => {
+    const paquet = getPaquet(current_name);
+    if (paquet.cartes.length == 0) {
+        const subtitle = `Il n'y a pas encore<br>de carte dans le paquet.<br><br><div>Ajouter une carte!</div>`;
+        document.querySelector("#paquet .subtitle").innerHTML = subtitle;
+        document.querySelector("#paquet .subtitle div").addEventListener("click", addCarte);
+        return;
     }
-    initialize() {
-        document.getElementById("paquet_goto_packs").addEventListener("click", this.gotoPaquets);
-        document.addEventListener("render", (event) => {
-            if (event.detail.page == "paquet")
-                this.render();
-        });
-    }
-    render() {
-        console.log("render paquet");
-    }
-}
-export const paquet = new Paquet();
+    document.querySelector("#paquet .title span").innerHTML = paquet.nom;
+    const count = paquet.cartes.length;
+    document.querySelector("#paquet .subtitle").innerHTML = `Il y a ${count} carte<br>dans ce paquet`;
+    paquet.cartes.map(one => {
+        const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
+        const text = `<div ${cls ? `class='${cls}'` : ""}><div>${one.key}</div></div>`;
+        document.getElementById("card_list").innerHTML = text;
+    });
+};
+const addCarte = () => {
+    addCarteToPaquet(current_name);
+    render();
+};
+const gotoPaquets = (event) => {
+    goto("paquets");
+};
 //# sourceMappingURL=paquet.js.map

@@ -1,39 +1,35 @@
-import { state } from "./state.js";
-export class Paquets {
-    constructor() {
-        this.addPaquet = () => {
-            state.addPaquet("bonjour!");
-            this.render();
-        };
-        this.gotoPaquet = (event) => {
-            const element = event.target;
-            if (element.nodeName != "DIV")
-                return;
-            state.goto("paquet", element.textContent);
-        };
+import { state, goto, hasPaquet, addPaquetToDeck } from "./state.js";
+export const initialize = () => {
+    document.getElementById("paquets_add_pack").addEventListener("click", addPaquet);
+    document.getElementById("paquet_list").addEventListener("click", (e) => gotoPaquet(e));
+    document.addEventListener("render", (event) => {
+        if (event.detail.page == "paquets")
+            render();
+    });
+};
+const render = () => {
+    if (!hasPaquet()) {
+        const subtitle = `Il n'y a pas encore<br>de paquet.<br><br><div>Ajouter un paquet!</div>`;
+        document.querySelector("#paquets .subtitle").innerHTML = subtitle;
+        document.querySelector("#paquets .subtitle div").addEventListener("click", addPaquet);
+        return;
     }
-    initialize() {
-        const me = this;
-        document.getElementById("paquets_add_pack").addEventListener("click", this.addPaquet);
-        document.querySelector("#paquets_empty div").addEventListener("click", this.addPaquet);
-        document.getElementById("paquet_list").addEventListener("click", (e) => this.gotoPaquet(e));
-        document.addEventListener("render", (event) => {
-            if (event.detail.page == "paquets")
-                this.render();
-        });
-    }
-    render() {
-        const display = state.hasPaquet() ? "none" : "block";
-        document.getElementById("paquets_empty").style.display = display;
-        if (!state.hasPaquet())
-            return;
-        const pids = state.userdata.pids;
-        const text = pids.map(one => {
-            const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
-            const text = `<li ${cls ? `class='${cls}'` : ""}><div>${one.nom}</div></li>`;
-            document.getElementById("paquet_list").innerHTML = text;
-        });
-    }
-}
-export const paquets = new Paquets();
+    const count = state.paquets.length;
+    document.querySelector("#paquets .subtitle").innerHTML = `Il y a ${count} paquets`;
+    state.paquets.map(one => {
+        const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
+        const text = `<li ${cls ? `class='${cls}'` : ""}><div>${one.nom}</div></li>`;
+        document.getElementById("paquet_list").innerHTML = text;
+    });
+};
+const addPaquet = () => {
+    addPaquetToDeck("bonjour!");
+    render();
+};
+const gotoPaquet = (event) => {
+    const element = event.target;
+    if (element.nodeName != "DIV")
+        return;
+    goto("paquet", element.textContent);
+};
 //# sourceMappingURL=paquets.js.map

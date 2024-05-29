@@ -1,48 +1,43 @@
-import { menu } from "./menu.js"
-import { state } from "./state.js";
+import { state, goto, hasPaquet, addPaquetToDeck } from "./state.js";
 
-export class Paquets {
-    public initialize() {
-        const me = this;
+export const initialize = () => {
+    document.getElementById("paquets_add_pack")!.addEventListener("click", addPaquet)
+    document.getElementById("paquet_list")!.addEventListener("click", (e) => gotoPaquet(e))
 
-        document.getElementById("paquets_add_pack")!.addEventListener("click", this.addPaquet)
-        document.querySelector("#paquets_empty div")!.addEventListener("click", this.addPaquet)
-        document.getElementById("paquet_list")!.addEventListener("click", (e) => this.gotoPaquet(e))
-
-        document.addEventListener("render", (event: any) => {
-            if (event.detail.page == "paquets")
-                this.render()
-        })
-    }
-
-    render() {
-        const display = state.hasPaquet() ? "none" : "block"
-        document.getElementById("paquets_empty")!.style.display = display;
-
-        if (!state.hasPaquet())
-            return;
-
-        const pids = state.userdata.pids;
-        const text = pids.map(one => {
-            const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
-
-            const text = `<li ${cls ? `class='${cls}'` : ""}><div>${one.nom}</div></li>`
-            document.getElementById("paquet_list")!.innerHTML = text;
-        })
-    }
-
-    addPaquet = () => {
-        state.addPaquet("bonjour!")
-        this.render();
-    }
-
-    gotoPaquet = (event: MouseEvent) => {
-        const element = event.target as Element;
-        if (element.nodeName != "DIV")
-            return;
-
-        state.goto("paquet", element.textContent!);
-    }
+    document.addEventListener("render", (event: any) => {
+        if (event.detail.page == "paquets")
+            render()
+    })
 }
 
-export const paquets = new Paquets();
+const render = () => {
+    if (!hasPaquet()) {
+        const subtitle = `Il n'y a pas encore<br>de paquet.<br><br><div>Ajouter un paquet!</div>`
+        document.querySelector("#paquets .subtitle")!.innerHTML = subtitle
+        document.querySelector("#paquets .subtitle div")!.addEventListener("click", addPaquet)
+        return;
+    }
+
+    const count = state.paquets.length;
+    document.querySelector("#paquets .subtitle")!.innerHTML = `Il y a ${count} paquets`
+
+    state.paquets.map(one => {
+        const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
+
+        const text = `<li ${cls ? `class='${cls}'` : ""}><div>${one.nom}</div></li>`
+        document.getElementById("paquet_list")!.innerHTML = text;
+    })
+}
+
+const addPaquet = () => {
+    addPaquetToDeck("bonjour!")
+    render();
+}
+
+const gotoPaquet = (event: MouseEvent) => {
+    const element = event.target as Element;
+    if (element.nodeName != "DIV")
+        return;
+
+    goto("paquet", element.textContent!);
+}

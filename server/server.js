@@ -16,7 +16,6 @@ const srcPath = path.join(__dirname, "../src");
 // Configure express virtual folders
 app.use(express.static(publicPath));
 app.use("/src", express.static(srcPath));
-///app.use(express.json());
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -24,19 +23,21 @@ app.use(bodyParser.json({ limit: "50mb" }));
 
 
 
-app.post("/not-used-readfile", (req, res) => {
-    const filename = req.body.filename;
-    const filePath = path.join(dataPath, filename);
+app.post('/save-state/:filename', async (req, res) => {
+    const jsonString = JSON.stringify(req.body);
+    try {
+        const fileName = `${req.params.filename}.json`
+        const filePath = path.join(dataPath, fileName);
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error(`Error reading file from disk: ${err}`);
-            res.json({});
-        }
-        else {
-            res.json(JSON.parse(data));
-        }
-    });
+        await fs.writeFile(filePath, jsonString);
+
+        console.log('Successfully wrote file');
+        res.send('Successfully wrote JSON to file.');
+    }
+    catch (error) {
+        console.log('Error writing file', error);
+        res.status(500).send("Failed to save the file: " + error.message);
+    }
 });
 
 app.post("/upload-canvas", async (req, res) => {

@@ -1,38 +1,67 @@
 import { menu } from "./menu.js";
 import { emitEvent } from "./utils.js";
-export class State {
-    async initialize(username) {
-        try {
-            this.userdata = { username };
-            const response = await fetch(`data/${username}.json`);
-            if (response.ok)
-                this.userdata = await response.json();
-        }
-        catch (error) {
-            console.error("ERROR:", error);
-        }
-        console.log(this.userdata);
+export let state;
+export async function initialize(username) {
+    try {
+        state = { username };
+        const response = await fetch(`data/${username}.json`);
+        if (response.ok)
+            state = await response.json();
     }
-    goto(page, paquetName = null) {
-        menu.close();
-        setTimeout(() => {
-            document.body.id = `body_${page}`;
-            emitEvent("render", { page, param: paquetName });
-        }, 200);
+    catch (error) {
+        console.error("ERROR:", error);
     }
-    hasPaquet() {
-        var _a, _b;
-        return ((_b = (_a = this.userdata.pids) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0;
-    }
-    addPaquet(name) {
-        if (this.userdata.pids == undefined)
-            this.userdata.pids = [];
-        this.userdata.pids.push({
-            nom: name,
-            success: undefined,
-            cids: []
-        });
-    }
+    console.log(state);
 }
-export const state = new State();
+export async function saveState() {
+    const username = state.username;
+    const body = JSON.stringify(state);
+    const response = await fetch(`save-state/${username}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.text();
+}
+export function goto(page, param = null) {
+    menu.close();
+    setTimeout(() => {
+        document.body.id = `body_${page}`;
+        emitEvent("render", { page, param });
+    }, 200);
+}
+export function hasPaquet() {
+    var _a, _b;
+    return ((_b = (_a = state.paquets) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0;
+}
+export function hasCarte(paquet) {
+    var _a, _b;
+    return ((_b = (_a = state.paquets) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0;
+}
+export function addPaquetToDeck(name) {
+    if (state.paquets == undefined)
+        state.paquets = [];
+    state.paquets.push({
+        nom: name,
+        success: undefined,
+        cartes: []
+    });
+    saveState();
+}
+export function getPaquet(name) {
+    return state.paquets.find(one => one.nom == name);
+}
+export function addCarteToPaquet(name) {
+    const carte = {
+        key: 42,
+        updatable: true,
+        faces: []
+    };
+    const paquet = state.paquets.find(one => one.nom == name);
+    paquet.cartes.push(carte);
+    saveState();
+}
 //# sourceMappingURL=state.js.map

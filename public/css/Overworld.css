@@ -144,6 +144,19 @@ body {
     font-size: xx-large;
     text-align: center;
     padding: 1rem 0;
+    
+    & div {
+        margin-left: 2.5rem;
+        background-size: 32px;
+        background-repeat: no-repeat;
+        background-position: 0 10px;
+        background-image: url("../icones/icone-plus.svg");
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
 }
 
 #paquet_list {
@@ -198,26 +211,7 @@ body {
     }
 }
 
-#paquets_empty {
-    font-size: xx-large;
-    text-align: center;
-    padding: 2rem 0;
-    
-    & div {
-        margin-left: 2.5rem;
-        background-size: 32px;
-        background-repeat: no-repeat;
-        background-position: 0 10px;
-        background-image: url("../icones/icone-plus.svg");
-
-        &:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-    }
-}
-
-.card-list {
+#card_list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
