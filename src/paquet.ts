@@ -5,6 +5,7 @@ let current_name: string;
 
 export const initialize = () => {
     document.getElementById("paquet_goto_packs")!.addEventListener("click", gotoPaquets)
+    document.getElementById("card_list")!.addEventListener("click", (e) => gotoCarte(e))
 
     document.addEventListener("render", (event: any) => {
         if (event.detail.page == "paquet") {
@@ -42,6 +43,18 @@ const addCarte = () => {
     render();
 }
 
-const gotoPaquets = (event: MouseEvent) => {
-    goto("paquets",);
+const gotoPaquets = () => {
+    goto("paquets");
+}
+
+const gotoCarte = (event: MouseEvent) => {
+    const element = event.target as Element;
+    if (element.nodeName != "DIV")
+        return;
+
+    // Only accept clicks on divs within #card_list
+    if (element.id == "card_list")
+        return;
+
+    goto("kanvas", element.textContent!, current_name);
 }

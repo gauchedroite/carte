@@ -26,11 +26,11 @@ export async function saveState() {
     }
     return response.text();
 }
-export function goto(page, param = null) {
+export function goto(page, param = null, parent = null) {
     menu.close();
     setTimeout(() => {
         document.body.id = `body_${page}`;
-        emitEvent("render", { page, param });
+        emitEvent("render", { page, param, parent });
     }, 200);
 }
 export function hasPaquet() {

@@ -1,6 +1,6 @@
 import { state, goto, hasPaquet, addPaquetToDeck } from "./state.js";
 export const initialize = () => {
-    document.getElementById("paquets_add_pack").addEventListener("click", addPaquet);
+    document.getElementById("paquets_add_pack").addEventListener("click", askPaquetName);
     document.getElementById("paquet_list").addEventListener("click", (e) => gotoPaquet(e));
     document.addEventListener("render", (event) => {
         if (event.detail.page == "paquets")
@@ -21,6 +21,8 @@ const render = () => {
         const text = `<li ${cls ? `class='${cls}'` : ""}><div>${one.nom}</div></li>`;
         document.getElementById("paquet_list").innerHTML = text;
     });
+};
+const askPaquetName = () => {
 };
 const addPaquet = () => {
     addPaquetToDeck("bonjour!");

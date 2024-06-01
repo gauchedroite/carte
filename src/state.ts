@@ -62,11 +62,11 @@ export async function saveState() {
 }
 
 
-export function goto (page: string, param: string | null = null) {
+export function goto (page: string, param: string | null = null, parent: string | null = null) {
     menu.close();
     setTimeout(() => {
         document.body.id = `body_${page}`
-        emitEvent("render", { page, param })
+        emitEvent("render", { page, param, parent })
     }, 200);
 }
 

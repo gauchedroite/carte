@@ -2,6 +2,7 @@ import { getPaquet, goto, addCarteToPaquet } from "./state.js";
 let current_name;
 export const initialize = () => {
     document.getElementById("paquet_goto_packs").addEventListener("click", gotoPaquets);
+    document.getElementById("card_list").addEventListener("click", (e) => gotoCarte(e));
     document.addEventListener("render", (event) => {
         if (event.detail.page == "paquet") {
             current_name = event.detail.param;
@@ -30,7 +31,16 @@ const addCarte = () => {
     addCarteToPaquet(current_name);
     render();
 };
-const gotoPaquets = (event) => {
+const gotoPaquets = () => {
     goto("paquets");
+};
+const gotoCarte = (event) => {
+    const element = event.target;
+    if (element.nodeName != "DIV")
+        return;
+    // Only accept clicks on divs within #card_list
+    if (element.id == "card_list")
+        return;
+    goto("kanvas", element.textContent, current_name);
 };
 //# sourceMappingURL=paquet.js.map
