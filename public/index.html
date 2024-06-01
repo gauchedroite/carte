@@ -18,6 +18,12 @@
 </head>
 <body unselectable="on">
 
+    <script id="import_main" type="text/javascript">
+        APP = {}
+        APP.roots = []
+        APP.admin = true
+    </script>
+    
     <div class="grid-container">
 
         <div class="left-tools">
@@ -107,92 +113,58 @@
                 </div>
             </div>
 
-            <div class="page-area" id="paquets">
-                <div class="menu">
-                    <ul>
-                        <li id="paquets_add_pack"><span>Ajouter un paquet</span></li>
-                    </ul>
-                    <div class="imperfect-horizontal-line"></div>
+            <div id="app_root">
+                <div class="page-area" id="paquets"></div>
+    
+                <div class="page-area" id="paquet"></div>
+    
+                <div class="page-area" id="modal">
+                    <div class="modal-content">
+                        <span id="modal_close">&times;</span>
+                        <p>Nom du nouveau paquet</p>
+                        <input type="text" id="modal_text">
+                        <button id="modal_ok" type="button">OK</button>
+                        <button id="modal_cancel" type="button">Annuler</button>
+                        </div>
                 </div>
-                <div class="title"><span>Les paquets</span></div>
-                <div class="subtitle"></div>
-                <ul id="paquet_list">
-                    <!--<li class="success"><div>Animaux</div></li>
-                    <li class="success"><div>Choses</div></li>
-                    <li><div>Pas essayé aujourd'hui</div></li>
-                    <li class="fail selected"><div>Difficile</div></li>-->
-                </ul>
-            </div>
-
-            <div class="page-area" id="paquet">
-                <div class="menu">
-                    <ul>
-                        <li id="paquet_add_card"><span>Ajouter une carte</span></li>
-                        <li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>
-                        <li id="paquet_delete_pack"><span>Détruire le paquet</span></li>
-                        <li id="paquet_goto_packs"><span>Aller à la liste de paquets</span></li>
-                    </ul>
-                    <div class="imperfect-horizontal-line"></div>
-                </div>
-                <div class="title"><span>TODO</span></div>
-                <div class="subtitle"></div>
-                <div id="card_list">
-                    <!--<div class="success"><div>1</div></div>
-                    <div class="success selected"><div>2</div></div>
-                    <div><div>3</div></div>
-                    <div class="fail"><div>4</div></div>
-                    <div class="success"><div>5</div></div>
-                    <div class="success"><div>6</div></div>
-                    <div class="success"><div>7</div></div>-->
-                </div>
-                <div class="bravo">Bravo pour ta réussite!</div>
-            </div>
-
-            <div id="kanvas">
-                <div class="menu">
-                    <ul>
-                        <li id="canvas_edit"><span style="font-weight:600;">Dessiner sur la carte</span></li>
-                        <li id="canvas_add_card"><span>Ajouter une carte</span></li>
-                        <li id="canvas_delete_card"><span>Détruire la carte</span></li>
-                        <li id="canvas_goto_pack"><span>Aller au paquet</span></li>
-                        <li id="canvas_no_update"><span>Don't save edits</span></li>
-                        <li id="canvas_add_face"><span>Ajouter une face</span></li>
-                        <li id="canvas_delete_face"><span>Détruire la face</span></li>
-                    </ul>
-                    <div class="imperfect-horizontal-line"></div>
-                </div>
-                <div id="canvas_surface"></div>
-                <div class="footer">
-                    <button type="button" id="kanvas_undo" class="oval ov1">
-                        <img src="./icones/icone-previous2.svg" title="undo" width="50" height="50">
-                    </button>
-                    <button type="button" id="kanvas_redo" class="oval ov2">
-                        <img src="./icones/icone-next2.svg" title="redo" width="50" height="50">
-                    </button>
-                <!--
-                    <button type="button" id="kanvas_check" class="oval ov3">
-                        <img src="./icones/icone-check.svg" title="check" width="50" height="50">
-                    </button>
-                    <button type="button" id="kanvas_delete" class="oval">
-                        <img src="./icones/icone-delete.svg" title="delete" width="50" height="50">
-                    </button>
-                -->
+    
+                <div id="kanvas">
+                    <div class="menu">
+                        <ul>
+                            <li id="canvas_edit"><span style="font-weight:600;">Dessiner sur la carte</span></li>
+                            <li id="canvas_add_card"><span>Ajouter une carte</span></li>
+                            <li id="canvas_delete_card"><span>Détruire la carte</span></li>
+                            <li id="canvas_goto_pack"><span>Aller au paquet</span></li>
+                            <li id="canvas_no_update"><span>Don't save edits</span></li>
+                            <li id="canvas_add_face"><span>Ajouter une face</span></li>
+                            <li id="canvas_delete_face"><span>Détruire la face</span></li>
+                        </ul>
+                        <div class="imperfect-horizontal-line"></div>
+                    </div>
+                    <div id="canvas_surface"></div>
+                    <div class="footer">
+                        <button type="button" id="kanvas_undo" class="oval ov1">
+                            <img src="./icones/icone-previous2.svg" title="undo" width="50" height="50">
+                        </button>
+                        <button type="button" id="kanvas_redo" class="oval ov2">
+                            <img src="./icones/icone-next2.svg" title="redo" width="50" height="50">
+                        </button>
+                    <!--
+                        <button type="button" id="kanvas_check" class="oval ov3">
+                            <img src="./icones/icone-check.svg" title="check" width="50" height="50">
+                        </button>
+                        <button type="button" id="kanvas_delete" class="oval">
+                            <img src="./icones/icone-delete.svg" title="delete" width="50" height="50">
+                        </button>
+                    -->
+                    </div>
                 </div>
             </div>
-
-            <div class="page-area" id="modal">
-                <div class="modal-content">
-                    <span id="modal_close">&times;</span>
-                    <p>Nom du nouveau paquet</p>
-                    <input type="text" id="modal_text">
-                    <button id="modal_ok" type="button">OK</button>
-                    <button id="modal_cancel" type="button">Annuler</button>
-                  </div>
-            </div>
-
         </div>
     </div>
 
+    <script src="./lib/morphdom-umd.js"></script>
+    <script src="./lib/toastify.min.js" defer></script>
     <script src="./lib/croquis.js"></script>
     <script type="module" src="./js/index.js"></script>
 </body>

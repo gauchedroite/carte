@@ -1,22 +1,26 @@
 import { menu } from "./menu.js";
 import { emitEvent } from "./utils.js";
 export let state;
-export async function initialize(username) {
+let username;
+export function initialize(user_name) {
+    username = user_name;
+}
+export async function fetch() {
+    if (state != undefined)
+        return Promise.resolve();
     try {
         state = { username };
-        const response = await fetch(`data/${username}.json`);
+        const response = await window.fetch(`data/${username}.json`);
         if (response.ok)
             state = await response.json();
     }
     catch (error) {
         console.error("ERROR:", error);
     }
-    console.log(state);
 }
 export async function saveState() {
-    const username = state.username;
     const body = JSON.stringify(state);
-    const response = await fetch(`save-state/${username}`, {
+    const response = await window.fetch(`save-state/${username}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: body
@@ -39,7 +43,7 @@ export function hasPaquet() {
 }
 export function hasCarte(paquet) {
     var _a, _b;
-    return ((_b = (_a = state.paquets) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0;
+    return ((_b = (_a = paquet.cartes) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0;
 }
 export function addPaquetToDeck(name) {
     if (state.paquets == undefined)

@@ -14,14 +14,8 @@ export class Menu {
             const menu_area = document.querySelector("#menu_area")!
             menu_area?.classList.toggle("opened")
 
-            const paquets_menu = document.querySelector("#body_paquets #paquets .menu")!
-            paquets_menu?.classList.toggle("opened")
-
-            const paquet_menu = document.querySelector("#body_paquet #paquet .menu")!
-            paquet_menu?.classList.toggle("opened")
-
-            const canvas_menu = document.querySelector("#body_kanvas #kanvas .menu")!
-            canvas_menu?.classList.toggle("opened")
+            const menu = document.querySelector("#app_root .menu")!
+            menu?.classList.toggle("opened")
         });
     }
 

@@ -72,6 +72,14 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+
+            & a {
+                color: inherit;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
         li#paquets_add_pack, li#paquet_add_card, #canvas_add_card, #canvas_add_face { background-image: url("../icones/icone-plus.svg"); }
