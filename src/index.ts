@@ -30,8 +30,7 @@ State_initialize("laura");
 
 
 const fetch = (args: string[] | undefined) => {
-    App.prepareRender(NS, "Index", "game_index")
-    App.render()
+    router.goto("#/paquets")
 }
 
 export const render = () => {

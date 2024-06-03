@@ -1,38 +1,53 @@
 #modal {
-    display: none;
-    z-index: 1;
-    padding-top: 100px;
+    position: absolute;
     left: 0;
     top: 0;
+    z-index: 2;
     width: var(--canvas-width);
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
+    padding-top: 200px;
     background-color: rgba(0, 0, 0, 0.4);
 
     .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
         width: 80%;
+        margin: auto;
+        padding: 30px;
+        border: 2px solid #888;
+        border-radius: 20px;
+        box-shadow: 8px 8px 12px hsla(0, 0%, 0%, .3);
+        background-color: var(--tools-bg-color);
     }
 
-    #modal_close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-
-        &:hover,
-        &:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .modal-title {
+        font-weight: 600;
+        font-size: 125%;
+        margin: 0.5rem 0 1rem;
     }
 
-    #modal_text {
+    & input {
+        font-size: 125%;
         display: block;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 2%;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 4px;
+    }
+
+    .buttons-row {
+        margin: 1.5rem 0 0;        
+    }
+
+    & button {
+        font-size: 125%;
+
+        &.ok {
+            float: right;
+            color: green;
+        }
+
+        &.cancel {
+            color: gray;
+        }
     }
 }

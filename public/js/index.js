@@ -14,8 +14,7 @@ menu.initialize();
 // Set user context
 State_initialize("laura");
 const fetch = (args) => {
-    App.prepareRender(NS, "Index", "game_index");
-    App.render();
+    router.goto("#/paquets");
 };
 export const render = () => {
     if (!App.inContext(NS))

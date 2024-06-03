@@ -27,7 +27,7 @@ const template = () => {
     if (!hasCarte(paquet)) {
         return `
         <div class="title"><span>${paquet.nom}</span></div>
-        <div class="subtitle">Il n'y a pas encore<br>de carte dans le paquet.<br><br>
+        <div class="subtitle">Il n'y a pas encore<br>de carte dans ce paquet.<br><br>
             <div onclick="${NS}.onAddCard()">Ajouter une carte!</div>
         </div>
         `
@@ -45,7 +45,7 @@ const template = () => {
 
     return `
 <div class="title"><span>${paquet.nom}</span></div>
-<div class="subtitle">Il y a ${count} cartes</div>
+<div class="subtitle">Il contient ${count} carte</div>
 <div id="card_list">
         ${lines}
 </div>
@@ -65,7 +65,7 @@ const template = () => {
 
 export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
-    App.prepareRender(NS, "Paquet", "paquet")
+    App.prepareRender(NS, "Paquet")
     state_fetch()
         .then(App.render)
         .catch(App.render)
@@ -86,16 +86,4 @@ export const postRender = () => {
 export const onAddCard = () => {
     addCarteToPaquet(current_name)
     App.render();
-}
-
-const gotoCarte = (event: MouseEvent) => {
-    const element = event.target as Element;
-    if (element.nodeName != "DIV")
-        return;
-
-    // Only accept clicks on divs within #card_list
-    if (element.id == "card_list")
-        return;
-
-    //goto("kanvas", element.textContent!, current_name);
 }
