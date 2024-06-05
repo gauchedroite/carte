@@ -14,7 +14,7 @@ interface IPaquet {
 }
 
 interface ICarte {
-    key: number
+    carteid: number
     date?: Date
     success?: boolean
     updatable: boolean
@@ -22,7 +22,7 @@ interface ICarte {
 }
 
 interface IFace {
-    filename: string // `carte_${id}_${noseq}.png`
+    filename: string // `{username}/${carteid}_${faceindex}.png`
 }
 
 
@@ -31,8 +31,12 @@ export let state!: IState;
 let username: string;
 
 
-export function initialize(user_name: string) {
+export function setStateUsername(user_name: string) {
     username = user_name;
+}
+
+export function getStateUsername() {
+    return username;
 }
 
 export async function fetch () {
@@ -101,7 +105,7 @@ export function getPaquet(name: string) {
 
 export function addCarteToPaquet(name: string) {
     const carte = <ICarte>{
-        key: 42,
+        carteid: 42,
         updatable: true,
         faces: []
     }

@@ -2,8 +2,11 @@ import { menu } from "./menu.js";
 import { emitEvent } from "./utils.js";
 export let state;
 let username;
-export function initialize(user_name) {
+export function setStateUsername(user_name) {
     username = user_name;
+}
+export function getStateUsername() {
+    return username;
 }
 export async function fetch() {
     if (state != undefined)
@@ -60,7 +63,7 @@ export function getPaquet(name) {
 }
 export function addCarteToPaquet(name) {
     const carte = {
-        key: 42,
+        carteid: 42,
         updatable: true,
         faces: []
     };

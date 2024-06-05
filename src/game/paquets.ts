@@ -1,6 +1,7 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import * as Misc from "../core/misc.js"
+import { menu } from "../menu.js"
 import { state, fetch as state_fetch, hasPaquet, addPaquetToDeck } from "../state.js"
 
 export const NS = "G_Paquets"
@@ -9,7 +10,7 @@ export const NS = "G_Paquets"
 let show_modal = false;
 
 
-const menu = () => {
+const menuTemplate = () => {
     return `
 <div class="menu">
     <ul>
@@ -81,6 +82,7 @@ const pagetemplate = (menu: string, template: string, modal: string) => {
 
 
 export const fetch = (args: string[] | undefined) => {
+    menu.close()
     App.prepareRender(NS, "Paquets")
     state_fetch()
         .then(App.render)
@@ -90,11 +92,12 @@ export const fetch = (args: string[] | undefined) => {
 export const render = () => {
     if (!App.inContext(NS)) return ""
 
-    return pagetemplate(menu(), template(), show_modal ? modal() : "");
+    return pagetemplate(menuTemplate(), template(), show_modal ? modal() : "");
 }
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
+    menu.show_menu_area()
 }
 
 

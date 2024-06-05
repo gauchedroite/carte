@@ -1,5 +1,6 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
+import { menu } from "../menu.js"
 import { state, fetch as state_fetch, hasCarte, getPaquet, addCarteToPaquet } from "../state.js";
 
 export const NS = "G_Paquet"
@@ -7,11 +8,11 @@ export const NS = "G_Paquet"
 
 let current_name: string;
 
-const menu = () => {
+const menuTemplate = () => {
     return `
 <div class="menu">
     <ul>
-        <li id="paquet_add_card"><span>Ajouter une carte</span></li>
+        <li id="paquet_add_card"><span onclick="${NS}.onAddCard()">Ajouter une carte</span></li>
         <li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>
         <li id="paquet_delete_pack"><span>Détruire le paquet</span></li>
         <li id="paquet_goto_packs"><a href="#/paquets">Aller à la liste de paquets</a></li>
@@ -38,7 +39,7 @@ const template = () => {
         .map(one => {
             const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
             return `<div ${cls ? `class='${cls}'` : ""}>
-                <div>${one.key}</div>
+                <div>${one.carteid}</div>
             </div>`
         })
         .reduce((acc, one) => acc + one, "")
@@ -65,6 +66,7 @@ const template = () => {
 
 export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
+    menu.close()
     App.prepareRender(NS, "Paquet")
     state_fetch()
         .then(App.render)
@@ -74,7 +76,7 @@ export const fetch = (args: string[] | undefined) => {
 export const render = () => {
     if (!App.inContext(NS)) return ""
 
-    return menu() + template();
+    return menuTemplate() + template();
 }
 
 export const postRender = () => {
@@ -84,6 +86,7 @@ export const postRender = () => {
 
 
 export const onAddCard = () => {
+    menu.close()
     addCarteToPaquet(current_name)
-    App.render();
+    App.render()
 }

@@ -7,6 +7,10 @@
     z-index: 2;
     background-color: var(--tools-bg-color);
 
+    &.hidden {
+        display: none;
+    }
+
     .menu-content {
         display: flex;
         justify-content: space-between;

@@ -24,6 +24,16 @@ export class Menu {
         if (burger.classList.contains("opened"))
             document.getElementById("hamburger")!.click();
     }
+
+    public hide_menu_area() {
+        const menu = document.getElementById("menu_area")!
+        menu.classList.add("hidden")
+    }
+
+    public show_menu_area() {
+        const menu = document.getElementById("menu_area")!
+        menu.classList.remove("hidden")
+    }
 }
 
 export const menu = new Menu();
