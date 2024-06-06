@@ -1,7 +1,7 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import { menu } from "../menu.js"
-import { state, fetch as state_fetch, hasCarte, getPaquet, addCarteToPaquet } from "../state.js";
+import { state } from "../state.js";
 
 export const NS = "G_Paquet"
 
@@ -23,9 +23,9 @@ const menuTemplate = () => {
 }
 
 const template = () => {
-    const paquet = getPaquet(current_name);
+    const paquet = state.getPaquet(current_name);
 
-    if (!hasCarte(paquet)) {
+    if (!state.hasCarte(paquet)) {
         return `
         <div class="title"><span>${paquet.nom}</span></div>
         <div class="subtitle">Il n'y a pas encore<br>de carte dans ce paquet.<br><br>
@@ -68,7 +68,7 @@ export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
     menu.close()
     App.prepareRender(NS, "Paquet")
-    state_fetch()
+    state.fetch()
         .then(App.render)
         .catch(App.render)
 }
@@ -81,12 +81,13 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
+    menu.show_menu_area()
 }
 
 
 
 export const onAddCard = () => {
     menu.close()
-    addCarteToPaquet(current_name)
+    state.addCarteToPaquet(current_name)
     App.render()
 }

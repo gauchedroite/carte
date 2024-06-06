@@ -1,4 +1,4 @@
-import { goto } from "./state.js";
+import { state } from "./state.js";
 let current_name;
 let parent_name;
 export const initialize = () => {
@@ -30,6 +30,6 @@ const render = () => {
     // })
 };
 const gotoPaquet = () => {
-    goto("paquet", parent_name);
+    state.goto("paquet", parent_name);
 };
 //# sourceMappingURL=carte.js.map

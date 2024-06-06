@@ -1,4 +1,4 @@
-import { state, getPaquet, goto, addCarteToPaquet } from "./state.js";
+import { state } from "./state.js";
 
 
 let current_name: string;
@@ -41,5 +41,5 @@ const render = () => {
 }
 
 const gotoPaquet = () => {
-    goto("paquet", parent_name);
+    state.goto("paquet", parent_name);
 }

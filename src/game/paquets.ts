@@ -2,7 +2,7 @@ import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import * as Misc from "../core/misc.js"
 import { menu } from "../menu.js"
-import { state, fetch as state_fetch, hasPaquet, addPaquetToDeck } from "../state.js"
+import { state } from "../state.js"
 
 export const NS = "G_Paquets"
 
@@ -22,7 +22,7 @@ const menuTemplate = () => {
 }
 
 const template = () => {
-    if (!hasPaquet()) {
+    if (!state.hasPaquet()) {
         return `
         <div class="title"><span>Les paquets</span></div>
         <div class="subtitle">Il n'y a pas encore<br>de paquet.<br><br>
@@ -81,10 +81,16 @@ const pagetemplate = (menu: string, template: string, modal: string) => {
 
 
 
+const refresh = () => {
+    state.fetch()
+        .then(App.render)
+        .catch(App.render)    
+}
+
 export const fetch = (args: string[] | undefined) => {
     menu.close()
     App.prepareRender(NS, "Paquets")
-    state_fetch()
+    state.fetch()
         .then(App.render)
         .catch(App.render)
 }
@@ -102,16 +108,16 @@ export const postRender = () => {
 
 
 
-export const onModal = (what: string) => {
+export const onModal = async (what: string) => {
     if (what == "ok") {
         if (!Misc.html5Valid(NS)) return
 
         const name = (document.querySelector("#modal input") as HTMLInputElement).value
-        addPaquetToDeck(name)
+        await state.addPaquetToDeck(name)
     }
 
     show_modal = false;
-    App.render();
+    refresh()
 }
 
 export const onAddPaquet_Ask = () => {
