@@ -1,7 +1,6 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 //
-import { menu } from "./menu.js"
 import { state } from "./state.js";
 
 export const NS = "GBONJOUR";
@@ -35,10 +34,8 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
-    menu.hide_menu_area()
 }
 
 export const onBegin = () => {
-    menu.show_menu_area()
     router.goto(`#/paquets`)
 }

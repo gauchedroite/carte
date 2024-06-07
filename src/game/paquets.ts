@@ -1,18 +1,29 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import * as Misc from "../core/misc.js"
-import { menu } from "./menu.js"
 import { state } from "./state.js"
 
 export const NS = "G_Paquets"
 
 
+let burger_opened = false;
 let show_modal = false;
 
 
 const menuTemplate = () => {
     return `
-<div class="menu">
+<div id="menu_area">
+    <div class="menu-content">
+        <div id="hamburger" class="menu-top ${burger_opened ? "opened" : ""}" onclick="${NS}.onHamburger()">
+            <svg width="30" height="30" viewBox="0 0 30 30">
+                <path stroke-width="2" d="M4 8 L26 8"></path>
+                <path stroke-width="2" d="M4 15 L26 15"></path>
+                <path stroke-width="2" d="M4 22 L26 22"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+<div class="menu ${burger_opened ? "opened" : ""}">
     <ul>
         <li id="paquets_add_pack"><span onclick="${NS}.onAddPaquet_Ask()">Ajouter un paquet</span></li>
     </ul>
@@ -88,7 +99,7 @@ const refresh = () => {
 }
 
 export const fetch = (args: string[] | undefined) => {
-    menu.close()
+    burger_opened = false
     App.prepareRender(NS, "Paquets")
     refresh()
 }
@@ -101,9 +112,13 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
-    menu.show_menu_area()
 }
 
+
+export const onHamburger = () => {
+    burger_opened = !burger_opened
+    App.render()
+}
 
 
 export const onModal = async (what: string) => {
@@ -120,5 +135,6 @@ export const onModal = async (what: string) => {
 
 export const onAddPaquet_Ask = () => {
     show_modal = true;
+    burger_opened = false
     App.render()
 }

@@ -1,18 +1,30 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
-import { menu } from "./menu.js"
 import { state } from "./state.js";
 
 export const NS = "G_Paquet"
 
 
 let current_name: string;
+
+let burger_opened = false;
 let show_delete_modal = false;
 
 
 const menuTemplate = () => {
     return `
-<div class="menu">
+<div id="menu_area">
+    <div class="menu-content">
+        <div id="hamburger" class="menu-top ${burger_opened ? "opened" : ""}" onclick="${NS}.onHamburger()">
+            <svg width="30" height="30" viewBox="0 0 30 30">
+                <path stroke-width="2" d="M4 8 L26 8"></path>
+                <path stroke-width="2" d="M4 15 L26 15"></path>
+                <path stroke-width="2" d="M4 22 L26 22"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+<div class="menu ${burger_opened ? "opened" : ""}">
     <ul>
         <li id="paquet_add_card"><span onclick="${NS}.onAddCard()">Ajouter une carte</span></li>
         <!--<li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>-->
@@ -96,7 +108,7 @@ const refresh = () => {
 
 export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
-    menu.close()
+    burger_opened = false
     App.prepareRender(NS, "Paquet")
     refresh()
 }
@@ -109,13 +121,17 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
-    menu.show_menu_area()
 }
 
 
+export const onHamburger = () => {
+    burger_opened = !burger_opened
+    App.render()
+}
+
 
 export const onAddCard = async () => {
-    menu.close()
+    burger_opened = false
     await state.addCarteToPaquet(current_name)
     refresh()
 }

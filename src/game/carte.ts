@@ -1,6 +1,5 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
-import { menu } from "./menu.js"
 import { state, ICarte, IPaquet } from "./state.js";
 import { myCroquis } from "./mycroquis.js"
 
@@ -17,15 +16,32 @@ let filename: string;
 let carteIndex: number;
 let isLastCard = false;
 
+let burger_opened = false;
 let show_delete_card_modal = false;
 let show_delete_face_modal = false;
 
 
 const menuTemplate = () => {
     return `
-<div class="menu">
+<div id="menu_area">
+    <div class="menu-content">
+        <div id="hamburger" class="menu-top ${burger_opened ? "opened" : ""}" onclick="${NS}.onHamburger()">
+            <svg width="30" height="30" viewBox="0 0 30 30">
+                <path stroke-width="2" d="M4 8 L26 8"></path>
+                <path stroke-width="2" d="M4 15 L26 15"></path>
+                <path stroke-width="2" d="M4 22 L26 22"></path>
+            </svg>
+        </div>
+        <div id="menu_center" onclick="${NS}.showTools()">
+            <img src="./icones/icone-edit.svg" title="Edit">
+        </div>
+        <div id="menu_right" class="success">
+            <div>3/12</div>
+        </div>
+    </div>
+</div>
+<div class="menu ${burger_opened ? "opened" : ""}">
     <ul>
-        <li id="canvas_edit"><span onclick="${NS}.showTools()" style="font-weight:600;">Dessiner sur la carte</span></li>
         <li id="canvas_add_card"><span>Ajouter une carte</span></li>
         <li id="canvas_delete_card"><span onclick="${NS}.onDestroyCarte_Ask()">Détruire la carte</span></li>
         <li id="canvas_goto_pack"><a href="#/paquet/${paquet.nom}">Aller au paquet</a></li>
@@ -94,28 +110,30 @@ const pagetemplate = (menu: string, modal1: string) => {
 }
 
 
-const refresh = () => {
-    state.fetch()
-        .then(App.render)
-        .catch(App.render)    
-}
-
 export const fetch = (args: string[] | undefined) => {
     cardid = +args![0]
     faceindex = +args![1]
-    menu.close()
+
     App.prepareRender(NS, "Carte")
-    refresh()
+
+    state.fetch()
+        .then(() => {
+            carte = state.getCarte(cardid)
+            paquet = state.getPaquetFromCarte(cardid)
+            filename = state.buildFaceFilename(cardid, faceindex)
+            carteIndex = state.getCarteIndex(paquet, cardid)
+            isLastCard = carteIndex == paquet.cartes.length - 1;
+        
+            myCroquis.loadImage(filename)
+
+            burger_opened = false
+        })
+        .then(App.render)
+        .catch(App.render) 
 }
 
 export const render = () => {
     if (!App.inContext(NS)) return ""
-
-    carte = state.getCarte(cardid)
-    paquet = state.getPaquetFromCarte(cardid)
-    filename = state.buildFaceFilename(cardid, faceindex)
-    carteIndex = state.getCarteIndex(paquet, cardid)
-    isLastCard = carteIndex == paquet.cartes.length - 1;
 
     const modal1 = show_delete_card_modal ? deleteModal() : ""
     return pagetemplate(menuTemplate(), modal1);
@@ -123,15 +141,20 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
-    menu.show_menu_area()
 
-    myCroquis.loadImage(filename)
     App.renderPartial("footer", `<div id="footer">${kanvasFooter()}</div>`)
 }
 
 
+export const onHamburger = () => {
+    burger_opened = !burger_opened
+    App.render()
+}
+
+
 export const showTools = () => {
-    
+    const tools = document.querySelector(".left-tools")!
+    tools.classList.toggle("show")
 }
 
 
@@ -146,7 +169,7 @@ export const onClickResult = (status: string) => {
 }
 
 export const onAddFace = async () => {
-    menu.close()
+    burger_opened = false
     await state.addFaceToCarte(carte)
     router.goto(`#/carte/${cardid}/${faceindex + 1}`)
 }

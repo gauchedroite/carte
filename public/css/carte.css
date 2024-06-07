@@ -14,4 +14,8 @@
             cursor: default;
         }
     }
+
+    .left-tools.show {
+        display: unset;
+    }   
 }

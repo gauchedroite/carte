@@ -4,9 +4,7 @@ import * as router from "./core/router.js"
 import * as GameMain from "./game/main.js"
 import * as bonjour from "./game/bonjour.js"
 //
-import { menu } from "./game/menu.js"
 import { tools } from "./game/tools.js"
-import { myCroquis } from "./game/mycroquis.js"
 
 export const NS = "GINDEX";
 
@@ -20,9 +18,7 @@ document.addEventListener("touchstart", () => {});
 
 
 // Initialize objects that need to be initialized
-menu.initialize();
 tools.initialize();
-myCroquis.initialize();
 
 
 // Initialize the app

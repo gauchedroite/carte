@@ -56,9 +56,7 @@ body {
         display: none;
     }
     
-    .left-tools,
-    #menu_center,
-    #menu_right {
+    .left-tools {
         display: none;
     }    
 }

@@ -1,6 +1,3 @@
-import { menu } from "./menu.js"
-import { emitEvent } from "../utils.js"
-
 
 interface IState {
     username: string
