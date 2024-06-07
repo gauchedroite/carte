@@ -7,14 +7,16 @@ export const NS = "G_Paquet"
 
 
 let current_name: string;
+let show_delete_modal = false;
+
 
 const menuTemplate = () => {
     return `
 <div class="menu">
     <ul>
         <li id="paquet_add_card"><span onclick="${NS}.onAddCard()">Ajouter une carte</span></li>
-        <li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>
-        <li id="paquet_delete_pack"><span>Détruire le paquet</span></li>
+        <!--<li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>-->
+        <li id="paquet_delete_pack" onclick="${NS}.onDestroyPaquet_Ask()"><span>Détruire le paquet</span></li>
         <li id="paquet_goto_packs"><a href="#/paquets">Aller à la liste de paquets</a></li>
     </ul>
     <div class="imperfect-horizontal-line"></div>
@@ -62,6 +64,28 @@ const template = () => {
     <div class="success"><div>7</div></div>-->*/
 }
 
+const deleteModal = () => {
+    return `
+<div id="modal">
+    <div class="modal-content">
+        <div class="modal-title centered">Veux-tu vraiment détruire ce paquet?</div>
+        <div class="buttons-row">
+            <button type="button" class="oval cancel" onclick="${NS}.onDestroyPaquet('no')">Non</button>
+            <button type="button" class="oval ok" onclick="${NS}.onDestroyPaquet('yes')">&nbsp;Oui&nbsp;</button>
+        </div>
+    </div>
+</div>
+    `
+}
+
+const pagetemplate = (menu: string, template: string, modal: string) => {
+    return `
+    <form>
+        <input type="submit" style="display:none;" id="${NS}_dummy_submit">
+        ${menu + template + modal}
+    </form>
+    `;
+}
 
 
 const refresh = () => {
@@ -80,7 +104,7 @@ export const fetch = (args: string[] | undefined) => {
 export const render = () => {
     if (!App.inContext(NS)) return ""
 
-    return menuTemplate() + template();
+    return pagetemplate(menuTemplate(), template(), show_delete_modal ? deleteModal() : "");
 }
 
 export const postRender = () => {
@@ -94,4 +118,18 @@ export const onAddCard = async () => {
     menu.close()
     await state.addCarteToPaquet(current_name)
     refresh()
+}
+
+
+export const onDestroyPaquet_Ask = () => {
+    show_delete_modal = true;
+    App.render()
+}
+
+export const onDestroyPaquet = async (what: string) => {
+    if (what == "yes") {
+        await state.deletePaquet(current_name)
+    }
+    show_delete_modal = false;
+    router.goto(`#/paquets`)
 }

@@ -136,6 +136,15 @@ class State {
         return this._state!.paquets.find(one => one.nom == name)!
     }
 
+    deletePaquet(name: string) {
+        const index = this._state!.paquets.findIndex(one => one.nom == name);
+        if (index != -1) {
+            this._state!.paquets.splice(index, 1)
+        }
+        return this.saveState();
+    }
+
+
     async addCarteToPaquet(paquetName: string) {
         const paquet = this._state!.paquets.find(one => one.nom == paquetName)!
 
@@ -196,6 +205,19 @@ class State {
 
     getCarteIndex(paquet: IPaquet, cardid: number): number {
         return paquet.cartes.findIndex(one => one.carteid == cardid);
+    }
+
+    deleteCarte(paquet: IPaquet, cardid: number) {
+        const index = this.getCarteIndex(paquet, cardid)
+        if (index != -1) {
+            paquet.cartes.splice(index, 1)
+        }
+        return this.saveState();
+    }
+
+    deleteFace(cardid: number, faceindex: number) {
+        const carte = this.getCarte(cardid)
+        carte.faces.splice(faceindex, 1)
     }
 }
 

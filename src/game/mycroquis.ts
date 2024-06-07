@@ -15,8 +15,8 @@ export class MyCroquis {
         const crayon = document.getElementById("menu_center")!
 
         crayon.addEventListener("click", function (event: Event) {
-            const paquets_menu = document.querySelector(".left-tools")!
-            paquets_menu?.classList.toggle("opened")
+            const tools = document.querySelector(".left-tools")!
+            tools?.classList.toggle("opened")
         });
     }
 

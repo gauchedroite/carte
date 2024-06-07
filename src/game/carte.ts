@@ -7,6 +7,7 @@ import { myCroquis } from "./mycroquis.js"
 export const NS = "G_Carte"
 
 
+
 let cardid: number;
 let faceindex: number;
 
@@ -16,18 +17,21 @@ let filename: string;
 let carteIndex: number;
 let isLastCard = false;
 
+let show_delete_card_modal = false;
+let show_delete_face_modal = false;
+
 
 const menuTemplate = () => {
     return `
 <div class="menu">
     <ul>
-        <li id="canvas_edit"><span style="font-weight:600;">Dessiner sur la carte</span></li>
+        <li id="canvas_edit"><span onclick="${NS}.showTools()" style="font-weight:600;">Dessiner sur la carte</span></li>
         <li id="canvas_add_card"><span>Ajouter une carte</span></li>
-        <li id="canvas_delete_card"><span>Détruire la carte</span></li>
+        <li id="canvas_delete_card"><span onclick="${NS}.onDestroyCarte_Ask()">Détruire la carte</span></li>
         <li id="canvas_goto_pack"><a href="#/paquet/${paquet.nom}">Aller au paquet</a></li>
-        <li id="canvas_no_update"><span>Don't save edits</span></li>
+        <li id="canvas_no_update"><div class="muted">Don't save edits</div></li>
         <li id="canvas_add_face"><a href="#" onclick="${NS}.onAddFace();return false;">Ajouter une face</a></li>
-        <li id="canvas_delete_face"><span>Détruire la face</span></li>
+        <!--<li id="canvas_delete_face"><span>Détruire la face</span></li>-->
     </ul>
     <div class="imperfect-horizontal-line"></div>
 </div>
@@ -66,6 +70,28 @@ const kanvasFooter = () => {
     }
 }
 
+const deleteModal = () => {
+    return `
+<div id="modal">
+    <div class="modal-content">
+        <div class="modal-title centered">Veux-tu vraiment détruire cete carte?</div>
+        <div class="buttons-row">
+            <button type="button" class="oval cancel" onclick="${NS}.onDestroyCarte('no')">Non</button>
+            <button type="button" class="oval ok" onclick="${NS}.onDestroyCarte('yes')">&nbsp;Oui&nbsp;</button>
+        </div>
+    </div>
+</div>
+    `
+}
+
+const pagetemplate = (menu: string, modal1: string) => {
+    return `
+    <form>
+        <input type="submit" style="display:none;" id="${NS}_dummy_submit">
+        ${menu + modal1}
+    </form>
+    `;
+}
 
 
 const refresh = () => {
@@ -91,7 +117,8 @@ export const render = () => {
     carteIndex = state.getCarteIndex(paquet, cardid)
     isLastCard = carteIndex == paquet.cartes.length - 1;
 
-    return menuTemplate();
+    const modal1 = show_delete_card_modal ? deleteModal() : ""
+    return pagetemplate(menuTemplate(), modal1);
 }
 
 export const postRender = () => {
@@ -100,6 +127,11 @@ export const postRender = () => {
 
     myCroquis.loadImage(filename)
     App.renderPartial("footer", `<div id="footer">${kanvasFooter()}</div>`)
+}
+
+
+export const showTools = () => {
+    
 }
 
 
@@ -118,3 +150,33 @@ export const onAddFace = async () => {
     await state.addFaceToCarte(carte)
     router.goto(`#/carte/${cardid}/${faceindex + 1}`)
 }
+
+
+export const onDestroyCarte_Ask = () => {
+    show_delete_card_modal = true;
+    App.render()
+}
+
+export const onDestroyCarte = async (what: string) => {
+    if (what == "yes") {
+        await state.deleteCarte(paquet, cardid)
+    }
+    show_delete_card_modal = false;
+    router.goto(`#/paquet/${paquet.nom}`)
+}
+
+
+/*
+export const onDestroyFace_Ask = () => {
+    show_delete_face_modal = true;
+    App.render()
+}
+
+export const onDestroyFace = async (what: string) => {
+    show_delete_face_modal = false;
+    if (what == "yes") {
+        await state.deleteFace(cardid, faceindex)
+    }
+    router.goto(`#/carte/`)
+}
+*/
