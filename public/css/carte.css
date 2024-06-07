@@ -1,0 +1,17 @@
+
+#g_carte {
+    #kanvas {
+        display: unset;
+
+        #footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 2rem 2rem 2rem;
+            cursor: default;
+        }
+    }
+}

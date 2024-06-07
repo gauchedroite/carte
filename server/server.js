@@ -40,6 +40,48 @@ app.post('/save-state/:filename', async (req, res) => {
     }
 });
 
+app.post('/next-seqno', async (req, res) => {
+    try {
+        const filePath = path.join(dataPath, "_state.json");
+
+        // Read and parse the state.json file
+        let data = await fs.readFile(filePath, "utf8");
+        let state = JSON.parse(data);
+
+        // Increment the seqno property
+        state.seqno++;
+
+        // Write the updated state back to the file
+        await fs.writeFile(filePath, JSON.stringify(state));
+
+        // Send the incremented seqno back to the caller
+        res.send({ seqno: state.seqno });
+
+        console.log("Successfully incremented seqno");
+    }
+    catch (error) {
+        console.log("Error writing file", error);
+        res.status(500).send("Failed to save the file: " + error.message);
+    }
+});
+
+app.post('/new-face/:filename', async (req, res) => {
+    try {
+        const fileName = req.params.filename
+        const filePath = path.join(dataPath, fileName);
+        const emptyPath = path.join(dataPath, "_empty.png");
+
+        await fs.copyFile(emptyPath, filePath);
+
+        console.log('Successfully copied file');
+        res.send('Successfully created new face png.');
+    }
+    catch (error) {
+        console.log('Error copying file', error);
+        res.status(500).send("Failed to create new face png: " + error.message);
+    }
+});
+
 app.post("/upload-canvas", async (req, res) => {
     //if (req.file && req.body.filename) {
         const data = req.body.image;  // Get image data URL from request body

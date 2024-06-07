@@ -68,6 +68,17 @@ export class MyCroquis {
     public eraseSurface() {
         croquis.fillLayer("white")
     }
+
+    public loadImage(filename: string) {
+        const canvas = croquis.getLayerCanvas(1);
+        const ctx = canvas.getContext("2d");
+    
+        const img = new Image();
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+        };
+        img.src = filename;
+    }
 }
 export const myCroquis = new MyCroquis();
 

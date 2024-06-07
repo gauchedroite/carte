@@ -4,14 +4,11 @@ import * as router from "./core/router.js"
 import * as GameMain from "./game/main.js"
 import * as bonjour from "./game/bonjour.js"
 //
-import { menu } from "./menu.js"
+import { menu } from "./game/menu.js"
+import { tools } from "./game/tools.js"
+import { myCroquis } from "./game/mycroquis.js"
 
 export const NS = "GINDEX";
-
-
-import { initialize as Carte_initialize } from "./carte.js";
-import { tools } from "./tools.js"
-import { myCroquis } from "./mycroquis.js"
 
 
 // Global reference to the app. Used for some event handlers.
@@ -22,8 +19,10 @@ import { myCroquis } from "./mycroquis.js"
 document.addEventListener("touchstart", () => {});
 
 
-// Initialize the menu
+// Initialize objects that need to be initialized
 menu.initialize();
+tools.initialize();
+myCroquis.initialize();
 
 
 // Initialize the app
@@ -43,16 +42,3 @@ GameMain.startup();
 // Add a catchall route to bonjour
 router.addRoute("^#/?(.*)$", params => bonjour.fetch(params));
 
-
-
-
-/*
-tools.initialize();
-myCroquis.initialize();
-
-Paquets_initialize();
-Paquet_initialize();
-Carte_initialize();
-
-goto("paquets");
-*/

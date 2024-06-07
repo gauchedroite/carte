@@ -1,4 +1,4 @@
-import { state } from "./state.js";
+import { state } from "./game/state.js";
 let current_name;
 let parent_name;
 export const initialize = () => {

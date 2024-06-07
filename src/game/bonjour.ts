@@ -1,8 +1,8 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 //
-import { menu } from "../menu.js"
-import { state } from "../state.js";
+import { menu } from "./menu.js"
+import { state } from "./state.js";
 
 export const NS = "GBONJOUR";
 

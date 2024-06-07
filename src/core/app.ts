@@ -34,6 +34,7 @@ export let uiServerVersion: string;
 let pageRender: () => void;
 let pagePostRender: () => void;
 let rendering = false;
+let partialRendering = false;
 let hardRender = false;
 let renderRoot = "app_root";
 //
@@ -96,16 +97,16 @@ export const render = () => {
 
 const postRender = () => {
     document.title = title;
-    document.body.id = context.toLowerCase().replace("_", "-");
+    document.body.id = context.toLowerCase();
 };
 
-export const renderPartial = (id: string, markup: string) => {
-    if (!rendering) {
+export const renderPartial = (id: string, markup: string, forced = true) => {
+    if (!partialRendering) {
         let element = document.getElementById(id);
         if (element == null)
             return;
 
-        rendering = true;
+        partialRendering = true;
 
         ((<any>window).morphdom)(element, markup, {
             getNodeKey: function (node: HTMLElement) { return node.id; },
@@ -125,7 +126,7 @@ export const renderPartial = (id: string, markup: string) => {
             onBeforeElChildrenUpdated: function (fromEl: HTMLElement, toEl: HTMLElement) { return true; }
         });
 
-        rendering = false;
+        partialRendering = false;
     }
 }
 

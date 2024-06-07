@@ -16,6 +16,9 @@ class State {
     get paquets() {
         return this._state.paquets;
     }
+    //
+    // Operations on the server
+    //
     async fetch() {
         try {
             // Failure to retrieve this url is expected
@@ -40,6 +43,14 @@ class State {
             throw new Error('Network response was not ok ' + response.statusText);
         }
         return response.text();
+    }
+    async getNextSeqno() {
+        const response = await window.fetch(`next-seqno`, { method: 'POST' });
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        return data.seqno;
     }
     goto(page, param = null, parent = null) {
         menu.close();
@@ -69,9 +80,11 @@ class State {
     getPaquet(name) {
         return this._state.paquets.find(one => one.nom == name);
     }
-    addCarteToPaquet(name) {
+    async addCarteToPaquet(name) {
+        const seqno = await this.getNextSeqno();
         const carte = {
-            carteid: 42,
+            carteid: seqno,
+            alias: seqno.toString(),
             updatable: true,
             faces: []
         };

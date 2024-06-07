@@ -1,8 +1,8 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import * as Misc from "../core/misc.js"
-import { menu } from "../menu.js"
-import { state } from "../state.js"
+import { menu } from "./menu.js"
+import { state } from "./state.js"
 
 export const NS = "G_Paquets"
 
@@ -43,7 +43,7 @@ const template = () => {
 
     return `
 <div class="title"><span>Les paquets</span></div>
-<div class="subtitle">Il y a ${count} paquets</div>
+<div class="subtitle">Il y a ${count} paquet</div>
 <ul id="paquet_list">
     ${lines}
 </ul>
@@ -90,9 +90,7 @@ const refresh = () => {
 export const fetch = (args: string[] | undefined) => {
     menu.close()
     App.prepareRender(NS, "Paquets")
-    state.fetch()
-        .then(App.render)
-        .catch(App.render)
+    refresh()
 }
 
 export const render = () => {

@@ -1,7 +1,7 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
-import { menu } from "../menu.js"
-import { state } from "../state.js";
+import { menu } from "./menu.js"
+import { state } from "./state.js";
 
 export const NS = "G_Paquet"
 
@@ -39,7 +39,7 @@ const template = () => {
         .map(one => {
             const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
             return `<div ${cls ? `class='${cls}'` : ""}>
-                <div>${one.carteid}</div>
+                <div><a href="#/carte/${one.carteid}/0">${one.carteid}</a></div>
             </div>`
         })
         .reduce((acc, one) => acc + one, "")
@@ -64,13 +64,17 @@ const template = () => {
 
 
 
+const refresh = () => {
+    state.fetch()
+        .then(App.render)
+        .catch(App.render)    
+}
+
 export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
     menu.close()
     App.prepareRender(NS, "Paquet")
-    state.fetch()
-        .then(App.render)
-        .catch(App.render)
+    refresh()
 }
 
 export const render = () => {
@@ -86,8 +90,8 @@ export const postRender = () => {
 
 
 
-export const onAddCard = () => {
+export const onAddCard = async () => {
     menu.close()
-    state.addCarteToPaquet(current_name)
-    App.render()
+    await state.addCarteToPaquet(current_name)
+    refresh()
 }

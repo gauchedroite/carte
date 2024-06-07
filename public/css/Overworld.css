@@ -81,6 +81,9 @@ body {
 }
 
 #kanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: var(--canvas-width);
     height: var(--canvas-height);
     display: inline-block;
@@ -254,17 +257,6 @@ body {
     padding: 2rem;
     border-top: 1px solid whitesmoke;
     text-align: center;;
-}
-
-.footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 0 2rem 2rem 2rem;
-    cursor: default;
 }
 
 .imperfect-horizontal-line {
