@@ -21,6 +21,8 @@ const menuTemplate = () => {
                 <path stroke-width="2" d="M4 22 L26 22"></path>
             </svg>
         </div>
+        <div id="menu_center_title">Paquets</div>
+        <div id="menu_right">&nbsp;</div>
     </div>
 </div>
 <div class="menu ${burger_opened ? "opened" : ""}">

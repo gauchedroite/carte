@@ -8,18 +8,32 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            display: flex;
-            justify-content: space-around;
-            padding: 0 2rem 2rem 2rem;
-            cursor: default;
 
-            & button {
-                &.success {
-                    background-color: var(--success-color);
+            .buttons {
+                display: flex;
+                justify-content: space-around;
+                padding: 0 2rem 1rem 2rem;
+                cursor: default;
+
+                & button {
+                    &.success {
+                        background-color: var(--success-color);
+                    }
+    
+                    &.fail {
+                        background-color: var(--fail-color);
+                    }
                 }
+            }
 
-                &.fail {
-                    background-color: var(--fail-color);
+            .info {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                background-color: white;
+
+                & div {
+                    padding: 0 0.25rem;
                 }
             }
         }

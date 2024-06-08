@@ -29,6 +29,12 @@
             }
         }
 
+        #menu_center_title {
+            text-align: center;
+            font-size: 125%;
+            margin-top: 0.5rem;
+        }
+
         #menu_right {
             width: 40px;
             line-height: 2rem;

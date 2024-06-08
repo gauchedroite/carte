@@ -35,8 +35,8 @@ const menuTemplate = () => {
         <div id="menu_center" onclick="${NS}.showTools()">
             <img src="./icones/icone-edit.svg" title="Edit">
         </div>
-        <div id="menu_right" class="success">
-            <div>3/12</div>
+        <div id="menu_right" onclick="window.location.href='#/paquet/${paquet.nom}'">
+            <img src="./icones/icone-back.svg" title="back" width="20" height="20">
         </div>
     </div>
 </div>
@@ -61,32 +61,49 @@ const kanvasFooter = () => {
     const isFirstFace = faceindex == 0
     const isLastFace = faceindex == faceCount - 1;
 
+    let buttons = "";
+
     if (isLastFace) {
         const status = state.getCardStatus(cardid)
         const success = status?.success
-        return `
+        buttons = `
             <button type="button" class="oval ov3 ${success != undefined ? success ? "success" : "" : ""}" onclick="${NS}.onClickResult('success')">
-                <img src="./icones/icone-check.svg" title="check" width="50" height="50">
+                <img src="./icones/icone-check.svg" title="carte réussie" width="50" height="50">
             </button>
             <button type="button" class="oval ${success != undefined ? success ? "" : "fail" : ""}" onclick="${NS}.onClickResult('failure')">
-                <img src="./icones/icone-delete.svg" title="delete" width="50" height="50">
+                <img src="./icones/icone-delete.svg" title="carte échouée" width="50" height="50">
             </button>`
     }
     else if (!isFirstFace) {
-        return `
+        buttons = `
             <button type="button" class="oval ov1" onclick="window.location.href='#/carte/${cardid}/${faceindex - 1}'">
-                <img src="./icones/icone-previous2.svg" title="undo" width="50" height="50">
+                <img src="./icones/icone-previous2.svg" title="face précédente" width="50" height="50">
             </button>
             <button type="button" class="oval ov2" onclick="window.location.href='#/carte/${cardid}/${faceindex + 1}'">
-                <img src="./icones/icone-next2.svg" title="redo" width="50" height="50">
+                <img src="./icones/icone-next2.svg" title="face suivante" width="50" height="50">
             </button>`
     }
     else {
-        return `
+        buttons = `
             <button type="button" class="oval ov2" onclick="window.location.href='#/carte/${cardid}/1'">
-                <img src="./icones/icone-next2.svg" title="redo" width="50" height="50">
+                <img src="./icones/icone-next2.svg" title="face suivante" width="50" height="50">
             </button>`
     }
+
+    const info = `
+        <div class="info">
+            <div>Carte: ${carteIndex + 1}/${paquet.cartes.length}</div>
+            <div><b>${paquet.nom}</b></div>
+            <div>Face: ${faceindex + 1}/${carte.faces.length}</div>
+        </div>
+    `
+
+    return `
+    <div id="footer">
+        <div class="buttons">${buttons}</div>
+        <div class="info">${info}</div>
+    </div>
+    `
 }
 
 const deleteModal = () => {
@@ -109,7 +126,9 @@ const pagetemplate = (menu: string, modal1: string) => {
         <input type="submit" style="display:none;" id="${NS}_dummy_submit">
         ${menu + modal1}
     </form>
-    `;
+    <div class="toast" id="carte_done">Terminé les cartes!<br>On retourne au paquet.</div>
+    <div class="toast" id="next_carte">On change de carte.</div>
+`;
 }
 
 
@@ -146,7 +165,7 @@ export const render = () => {
 export const postRender = () => {
     if (!App.inContext(NS)) return
 
-    App.renderPartial("footer", `<div id="footer">${kanvasFooter()}</div>`)
+    App.renderPartial("footer", kanvasFooter())
 }
 
 
@@ -166,10 +185,18 @@ export const onClickResult = (status: string) => {
     state.setCarteStatus(cardid, status == "success")
 
     if (isLastCard) {
-        router.goto(`#/paquet/${paquet.nom}`)
+        var toast = document.getElementById("carte_done")!
+        toast.classList.add("show")
+        setTimeout(function(){ toast.classList.remove("show"); }, 1800);
+
+        router.goto(`#/paquet/${paquet.nom}`, 2000)
     }
     else {
-        router.goto(`#/carte/${paquet.cartes[carteIndex + 1].carteid}/0`)
+        var toast = document.getElementById("next_carte")!
+        toast.classList.add("show")
+        setTimeout(function(){ toast.classList.remove("show"); }, 1800);
+
+        router.goto(`#/carte/${paquet.cartes[carteIndex + 1].carteid}/0`, 1800)
     }
 }
 
