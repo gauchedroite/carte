@@ -1,1 +1,1 @@
-{"username":"christian","paquets":[{"nom":"TeSt","cartes":[{"carteid":12,"alias":"12","updatable":true,"faces":[{"filename":"christian_12_0.png"}]},{"carteid":14,"alias":"14","updatable":true,"faces":[{"filename":"christian_14_0.png"}]}]}]}
+{"username":"christian","paquets":[{"nom":"TeSt","cartes":[{"carteid":12,"alias":"12","updatable":true,"faces":[{"filename":"christian_12_0.png"},{"filename":"christian_12_1.png"}]},{"carteid":14,"alias":"14","updatable":true,"faces":[{"filename":"christian_14_0.png"}]}]}]}

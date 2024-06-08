@@ -80,6 +80,12 @@ export class Tools {
         erase_all.addEventListener("click", function () {
             my.eraseSurface()
         })
+
+        const save_canvas = document.getElementById("save_canvas")!;
+        save_canvas.addEventListener("click", function () {
+            const save_canvas_event = new CustomEvent("save_canvas");
+            document.dispatchEvent(save_canvas_event);
+        })
     }
 }
 

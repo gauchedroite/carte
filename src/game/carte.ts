@@ -42,6 +42,7 @@ const menuTemplate = () => {
 </div>
 <div class="menu ${burger_opened ? "opened" : ""}">
     <ul>
+        <li id="canvas_edit"><span onclick="${NS}.showTools()" style="font-weight:600;">Dessiner sur la carte</span></li>
         <li id="canvas_add_card"><span>Ajouter une carte</span></li>
         <li id="canvas_delete_card"><span onclick="${NS}.onDestroyCarte_Ask()">Détruire la carte</span></li>
         <li id="canvas_goto_pack"><a href="#/paquet/${paquet.nom}">Aller au paquet</a></li>
@@ -187,6 +188,25 @@ export const onDestroyCarte = async (what: string) => {
     show_delete_card_modal = false;
     router.goto(`#/paquet/${paquet.nom}`)
 }
+
+
+const saveCanvasDataURL = async () => {
+    const imageDataUrl = myCroquis.getCanvasDataURL()
+
+    const body = JSON.stringify({ image: imageDataUrl, filename });
+    
+    const response = await window.fetch("upload-face", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.text();
+}
+
+document.addEventListener("save_canvas", saveCanvasDataURL)
 
 
 /*

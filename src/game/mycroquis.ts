@@ -65,6 +65,11 @@ export class MyCroquis {
         };
         img.src = filename;
     }
+
+    public getCanvasDataURL() {
+        const canvas = croquis.getLayerCanvas(1);
+        return canvas.toDataURL("image/png");
+    }
 }
 export const myCroquis = new MyCroquis();
 

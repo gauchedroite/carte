@@ -9,7 +9,6 @@ const port = 9340;
 
 // Set paths
 const publicPath = path.join(__dirname, "../public");
-const assetsPath = path.join(__dirname, "../public/assets");
 const dataPath = path.join(__dirname, "../public/data");
 const srcPath = path.join(__dirname, "../src");
 
@@ -82,28 +81,21 @@ app.post('/new-face/:filename', async (req, res) => {
     }
 });
 
-app.post("/upload-canvas", async (req, res) => {
-    //if (req.file && req.body.filename) {
-        const data = req.body.image;  // Get image data URL from request body
+app.post("/upload-face", async (req, res) => {
+    try {
+        const fileName = req.body.filename;
+        const filePath = path.join(publicPath, fileName);
+        const data = req.body.image;
         const base64Data = data.replace(/^data:image\/png;base64,/, "");
 
-        const fileName = "cheval.png"; //req.body.filename; // Read filename from the body, specified by client
-        const filePath = path.join(assetsPath, fileName);
+        await fs.writeFile(filePath, base64Data, "base64");
 
-        try {
-            await fs.ensureDir(assetsPath);
-
-            // Write the file to disk
-            await fs.writeFile(filePath, base64Data, "base64");
-            res.status(200).send("File uploaded and saved as " + fileName);
-        }
-        catch (error) {
-            res.status(500).send("Failed to upload file: " + error.message);
-        }
-    //}
-    //else {
-    //    res.status(400).send("No file uploaded or filename not specified.");
-    //}
+        res.status(200).send("File uploaded and saved as " + fileName);
+    }
+    catch (error) {
+        console.log("Error saving png file", error);
+        res.status(500).send("Failed to upload file: " + error.message);
+    }
 });
 
 

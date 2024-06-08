@@ -6,6 +6,10 @@ button.oval {
     padding: 0.5rem;
     transition: box-shadow .25s ease;
 
+    & img {
+        object-fit: contain;
+    }
+
     &:hover {
         cursor: pointer;
         box-shadow: 2px 4px 12px #ddd;
