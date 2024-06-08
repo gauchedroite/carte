@@ -28,7 +28,7 @@ const menuTemplate = () => {
     <ul>
         <li id="paquet_add_card"><span onclick="${NS}.onAddCard()">Ajouter une carte</span></li>
         <!--<li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>-->
-        <li id="paquet_delete_pack" onclick="${NS}.onDestroyPaquet_Ask()"><span>Détruire le paquet</span></li>
+        <li id="paquet_delete_pack" onclick="${NS}.onDestroyPaquet('modal')"><span>Détruire le paquet</span></li>
         <li id="paquet_goto_packs"><a href="#/paquets">Aller à la liste de paquets</a></li>
     </ul>
     <div class="imperfect-horizontal-line"></div>
@@ -48,12 +48,23 @@ const template = () => {
         `
     }
 
+    const carteSelected = state.carteSelected
     const count = paquet.cartes.length;
+
     const lines = paquet.cartes
         .map(one => {
-            const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
-            return `<div ${cls ? `class='${cls}'` : ""}>
-                <div><a href="#/carte/${one.carteid}/0">${one.carteid}</a></div>
+            const status = state.getCardStatus(one.carteid)
+            const success = status?.success
+
+            const classList: string[] = []
+
+            if (success != undefined)
+                classList.push(success ? "success" : "fail")
+            if (one.carteid == carteSelected)
+                classList.push("selected")
+
+            return `<div ${classList.length ? `class='${classList.join(" ")}'` : ""}>
+                <a href="#/carte/${one.carteid}/0">${one.carteid}</a>
             </div>`
         })
         .reduce((acc, one) => acc + one, "")
@@ -108,6 +119,7 @@ const refresh = () => {
 
 export const fetch = (args: string[] | undefined) => {
     current_name = decodeURIComponent(args![0])
+    state.paquetSelected = current_name
     burger_opened = false
     App.prepareRender(NS, "Paquet")
     refresh()
@@ -137,15 +149,20 @@ export const onAddCard = async () => {
 }
 
 
-export const onDestroyPaquet_Ask = () => {
-    show_delete_modal = true;
-    App.render()
-}
-
 export const onDestroyPaquet = async (what: string) => {
-    if (what == "yes") {
-        await state.deletePaquet(current_name)
+    burger_opened = false
+
+    if (what == "modal") {
+        show_delete_modal = true;
+        App.render()
     }
-    show_delete_modal = false;
-    router.goto(`#/paquets`)
+    else if (what == "yes") {
+        await state.deletePaquet(current_name)
+        show_delete_modal = false
+        router.goto(`#/paquets`)
+    }
+    else {
+        show_delete_modal = false
+        App.render()
+    }
 }

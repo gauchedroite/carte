@@ -6,15 +6,12 @@ interface IState {
 
 export interface IPaquet {
     nom: string
-    success?: boolean
     cartes: ICarte[]
 }
 
 export interface ICarte {
     carteid: number
     alias: string
-    date?: Date
-    success?: boolean
     updatable: boolean
     faces: IFace[]
 }
@@ -23,16 +20,32 @@ interface IFace {
     filename: string // `{username}_${carteid}_${faceindex}.png`
 }
 
+interface ILocalState {
+    paquet: string
+    cardid: number
+    cards: ILocalCard[]
+}
+
+interface ILocalCard {
+    cardid: number
+    success: boolean
+    //date: Date
+}
+
+interface ILocalPaquet {
+    success: boolean
+}
 
 
 class State {
-    private _state: IState | undefined;
-    private _username: string | null
+    private _state: IState | undefined
+    private _username: string
+    private _localState: ILocalState
 
     constructor() {
-        this._username = localStorage.getItem("username")
-        if (this._username == undefined)
-            this._username = "laura";
+        this._localState = <ILocalState>{}
+        this._username = "laura"
+        this.username = localStorage.getItem("username") ?? "laura"
     }
 
 
@@ -40,6 +53,8 @@ class State {
     set username(value: string) {
         this._username = value
         localStorage.setItem("username", value)
+        const json = localStorage.getItem(value)
+        this._localState = JSON.parse(json ?? "{}")
     }
 
     get username() {
@@ -215,6 +230,76 @@ class State {
     deleteFace(cardid: number, faceindex: number) {
         const carte = this.getCarte(cardid)
         carte.faces.splice(faceindex, 1)
+    }
+
+
+    private saveLocalState() {
+        localStorage.setItem(this._username, JSON.stringify(this._localState))
+    }
+
+    set paquetSelected(paquetName: string) {
+        this._localState.paquet = paquetName
+        this.saveLocalState()
+    }
+
+    get paquetSelected() {
+        return this._localState.paquet
+    }
+
+    set carteSelected(cardid: number) {
+        this._localState.cardid = cardid
+        this.saveLocalState()
+    }
+
+    get carteSelected() {
+        return this._localState.cardid
+    }
+
+    setCarteStatus(cardid: number, success: boolean) {
+        if (this._localState.cards == undefined)
+            this._localState.cards = []
+
+        const entry = this._localState.cards.find(one => one.cardid == cardid)
+        if (entry == undefined) {
+            this._localState.cards.push(<ILocalCard>{
+                cardid,
+                success,
+                //date: new Date()
+            })
+        }
+        else {
+            entry.success = success
+            //entry.date = new Date()
+        }
+
+        this.saveLocalState()
+    }
+
+    getCardStatus(cardid: number) {
+        return this._localState.cards?.find(one => one.cardid == cardid)
+    }
+
+    getPaquetStatus(name: string) {
+        const paquet = this.getPaquet(name)
+
+        let undecided = false
+        let ok = true
+        paquet.cartes.forEach(one => {
+            const status = this.getCardStatus(one.carteid)
+            if (status != undefined) {
+                ok = ok && status.success
+            }
+            else {
+                undecided = true
+            }
+        })
+
+        const success = (!undecided ? ok : null)
+
+        let localStatus = <ILocalPaquet>{
+            success
+        }
+        return localStatus
     }
 }
 

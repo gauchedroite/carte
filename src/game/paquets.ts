@@ -42,11 +42,21 @@ const template = () => {
         `
     }
 
+    const paquetSelected = state.paquetSelected
     const count = state.paquets.length;
     const lines = state.paquets
         .map(one => {
-            const cls = one.success != undefined ? (one.success ? "success" : "fail") : "";
-            return `<li ${cls ? `class='${cls}'` : ""}>
+            const status = state.getPaquetStatus(one.nom)
+            const success = status?.success
+
+            const classList: string[] = []
+
+            if (success != undefined)
+                classList.push(success ? "success" : "fail")
+            if (one.nom == paquetSelected)
+                classList.push("selected")
+
+            return `<li ${classList.length ? `class='${classList.join(" ")}'` : ""}>
                 <a href="#/paquet/${one.nom}">${one.nom}</a>
             </li>`
         })
@@ -59,11 +69,6 @@ const template = () => {
     ${lines}
 </ul>
 `
-/*
-    <li class="success"><div>Animaux</div></li>
-    <li class="success"><div>Choses</div></li>
-    <li><div>Pas essayé aujourd'hui</div></li>
-    <li class="fail selected"><div>Difficile</div></li>*/
 }
 
 const modal = () => {

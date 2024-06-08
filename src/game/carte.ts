@@ -44,7 +44,7 @@ const menuTemplate = () => {
     <ul>
         <li id="canvas_edit"><span onclick="${NS}.showTools()" style="font-weight:600;">Dessiner sur la carte</span></li>
         <li id="canvas_add_card"><span>Ajouter une carte</span></li>
-        <li id="canvas_delete_card"><span onclick="${NS}.onDestroyCarte_Ask()">Détruire la carte</span></li>
+        <li id="canvas_delete_card"><span onclick="${NS}.onDestroyCarte('modal')">Détruire la carte</span></li>
         <li id="canvas_goto_pack"><a href="#/paquet/${paquet.nom}">Aller au paquet</a></li>
         <li id="canvas_no_update"><div class="muted">Don't save edits</div></li>
         <li id="canvas_add_face"><a href="#" onclick="${NS}.onAddFace();return false;">Ajouter une face</a></li>
@@ -62,11 +62,13 @@ const kanvasFooter = () => {
     const isLastFace = faceindex == faceCount - 1;
 
     if (isLastFace) {
+        const status = state.getCardStatus(cardid)
+        const success = status?.success
         return `
-            <button type="button" class="oval ov3" onclick="${NS}.onClickResult('success')">
+            <button type="button" class="oval ov3 ${success != undefined ? success ? "success" : "" : ""}" onclick="${NS}.onClickResult('success')">
                 <img src="./icones/icone-check.svg" title="check" width="50" height="50">
             </button>
-            <button type="button" class="oval" onclick="${NS}.onClickResult('failure')">
+            <button type="button" class="oval ${success != undefined ? success ? "" : "fail" : ""}" onclick="${NS}.onClickResult('failure')">
                 <img src="./icones/icone-delete.svg" title="delete" width="50" height="50">
             </button>`
     }
@@ -91,7 +93,7 @@ const deleteModal = () => {
     return `
 <div id="modal">
     <div class="modal-content">
-        <div class="modal-title centered">Veux-tu vraiment détruire cete carte?</div>
+        <div class="modal-title centered">Veux-tu vraiment détruire cette carte?</div>
         <div class="buttons-row">
             <button type="button" class="oval cancel" onclick="${NS}.onDestroyCarte('no')">Non</button>
             <button type="button" class="oval ok" onclick="${NS}.onDestroyCarte('yes')">&nbsp;Oui&nbsp;</button>
@@ -114,6 +116,7 @@ const pagetemplate = (menu: string, modal1: string) => {
 export const fetch = (args: string[] | undefined) => {
     cardid = +args![0]
     faceindex = +args![1]
+    state.carteSelected = cardid
 
     App.prepareRender(NS, "Carte")
 
@@ -160,7 +163,8 @@ export const showTools = () => {
 
 
 export const onClickResult = (status: string) => {
-    // store result, then
+    state.setCarteStatus(cardid, status == "success")
+
     if (isLastCard) {
         router.goto(`#/paquet/${paquet.nom}`)
     }
@@ -176,17 +180,22 @@ export const onAddFace = async () => {
 }
 
 
-export const onDestroyCarte_Ask = () => {
-    show_delete_card_modal = true;
-    App.render()
-}
-
 export const onDestroyCarte = async (what: string) => {
-    if (what == "yes") {
-        await state.deleteCarte(paquet, cardid)
+    burger_opened = false
+
+    if (what == "modal") {
+        show_delete_card_modal = true;
+        App.render()
     }
-    show_delete_card_modal = false;
-    router.goto(`#/paquet/${paquet.nom}`)
+    else if (what == "yes") {
+        await state.deleteCarte(paquet, cardid)
+        show_delete_card_modal = false;
+        router.goto(`#/paquet/${paquet.nom}`)
+    }
+    else {
+        show_delete_card_modal = false;
+        App.render()
+    }
 }
 
 

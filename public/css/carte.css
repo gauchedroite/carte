@@ -12,6 +12,16 @@
             justify-content: space-around;
             padding: 0 2rem 2rem 2rem;
             cursor: default;
+
+            & button {
+                &.success {
+                    background-color: var(--success-color);
+                }
+
+                &.fail {
+                    background-color: var(--fail-color);
+                }
+            }
         }
     }
 

@@ -92,7 +92,7 @@ body {
 .title {
     font-size: xxx-large;
     text-align: center;
-    padding: 3rem 0 1rem 0;
+    padding: 5rem 0 1rem 0;
 
     & span {
         position: relative;
@@ -158,17 +158,17 @@ body {
         }
     }
 
-    .success div {
+    .success a {
         background-color: var(--success-color);
         box-shadow: 0 0 6px var(--success-color);
     }
 
-    .fail div {
+    .fail a {
         background-color: var(--fail-color);
         box-shadow: 0 0 6px var(--fail-color);
     }
 
-    .selected div {
+    .selected a {
         position: relative;
 
         &::after {
@@ -183,7 +183,7 @@ body {
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            transform: scaleX(1.2) scaleY(1.5);
+            transform: scaleX(1.2) scaleY(2.5);
         }
     }
 }
@@ -203,29 +203,31 @@ body {
     & > div {
         margin: 0.5rem;
 
-        & > div {
+        & a {
             width: 3rem;
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
             padding: 0.55rem;
             border-radius: 50%;
 
             &:hover {
                 text-decoration: underline;
-                cursor: pointer;
             }
         }
     }
 
-    .success div {
+    .success a {
         background-color: var(--success-color);
         box-shadow: 0 0 6px var(--success-color);
     }
 
-    .fail div {
+    .fail a {
         background-color: var(--fail-color);
         box-shadow: 0 0 6px var(--fail-color);
     }
 
-    .selected div {
+    .selected a {
         position: relative;
 
         &::after {
