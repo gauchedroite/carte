@@ -36,7 +36,7 @@ const menuTemplate = () => {
             <img src="./icones/icone-edit.svg" title="Edit">
         </div>
         <div id="menu_right" onclick="window.location.href='#/paquet/${paquet.nom}'">
-            <img src="./icones/icone-back.svg" title="back" width="20" height="20">
+            <img src="./icones/icone-back.svg" title="Aller au paquet" width="20" height="20">
         </div>
     </div>
 </div>

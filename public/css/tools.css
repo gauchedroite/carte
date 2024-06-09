@@ -10,6 +10,10 @@
     padding: 0.5rem;
     background-color: var(--tools-bg-color);
 
+    button {
+        cursor: pointer;
+    }
+
     .tools-nav {
         text-align: center;
         & button {

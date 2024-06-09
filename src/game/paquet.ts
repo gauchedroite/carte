@@ -1,5 +1,6 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
+import { pluralize } from "../utils.js";
 import { state } from "./state.js";
 
 export const NS = "G_Paquet"
@@ -24,7 +25,7 @@ const menuTemplate = () => {
         </div>
         <div id="menu_center_title">Paquet</div>
         <div id="menu_right" onclick="window.location.href='#/paquets'">
-            <img src="./icones/icone-back.svg" title="back" width="20" height="20">
+            <img src="./icones/icone-back.svg" title="Aller à la boîte de paquets" width="20" height="20">
         </div>
     </div>
 </div>
@@ -33,7 +34,7 @@ const menuTemplate = () => {
         <li id="paquet_add_card"><span onclick="${NS}.onAddCard()">Ajouter une carte</span></li>
         <!--<li id="paquet_restart_pack"><span>Recommencer le paquet</span></li>-->
         <li id="paquet_delete_pack" onclick="${NS}.onDestroyPaquet('modal')"><span>Détruire le paquet</span></li>
-        <li id="paquet_goto_packs"><a href="#/paquets">Aller à la liste de paquets</a></li>
+        <li id="paquet_goto_packs"><a href="#/paquets">Aller à la boîte de paquets</a></li>
     </ul>
     <div class="imperfect-horizontal-line"></div>
 </div>
@@ -46,8 +47,8 @@ const template = () => {
     if (!state.hasCarte(paquet)) {
         return `
         <div class="title"><span>${paquet.nom}</span></div>
-        <div class="subtitle">Il n'y a pas encore<br>de carte dans ce paquet.<br><br>
-            <div onclick="${NS}.onAddCard()">Ajouter une carte!</div>
+        <div class="subtitle">Il n'y a pas encore<br>de carte dans ce paquet!<br><br>
+            <div onclick="${NS}.onAddCard()">Ajouter une carte</div>
         </div>
         `
     }
@@ -75,11 +76,11 @@ const template = () => {
 
     return `
 <div class="title"><span>${paquet.nom}</span></div>
-<div class="subtitle">Il contient ${count} carte</div>
+<div class="subtitle">Ce paquet contient ${count} ${pluralize("carte", count)}</div>
 <div id="card_list">
         ${lines}
 </div>
-<div class="bravo">Bravo pour ta réussite!</div>
+<!--<div class="bravo">Bravo pour ta réussite!</div>-->
 `
 /*
     <!--<div class="success"><div>1</div></div>

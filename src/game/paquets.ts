@@ -2,6 +2,7 @@ import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import * as Misc from "../core/misc.js"
 import { state } from "./state.js"
+import { capitalize, pluralize } from "../utils.js"
 
 export const NS = "G_Paquets"
 
@@ -21,7 +22,7 @@ const menuTemplate = () => {
                 <path stroke-width="2" d="M4 22 L26 22"></path>
             </svg>
         </div>
-        <div id="menu_center_title">Paquets</div>
+        <div id="menu_center_title">Boîte de paquets</div>
         <div id="menu_right">&nbsp;</div>
     </div>
 </div>
@@ -37,9 +38,9 @@ const menuTemplate = () => {
 const template = () => {
     if (!state.hasPaquet()) {
         return `
-        <div class="title"><span>Les paquets</span></div>
-        <div class="subtitle">Il n'y a pas encore<br>de paquet.<br><br>
-            <div onclick="${NS}.onAddPaquet_Ask()">Ajouter un paquet!</div>
+        <div class="title">Boîte de ${capitalize(state.username)}</div>
+        <div class="subtitle">Il n'y a pas encore de paquet dans la boîte!<br><br>
+            <div onclick="${NS}.onAddPaquet_Ask()">Ajouter un paquet</div>
         </div>
         `
     }
@@ -65,8 +66,8 @@ const template = () => {
         .reduce((acc, one) => acc + one, "")
 
     return `
-<div class="title"><span>Les paquets</span></div>
-<div class="subtitle">Il y a ${count} paquet</div>
+<div class="title">Boîte de ${capitalize(state.username)}</div>
+<div class="subtitle">Il y a ${count} ${pluralize("paquet", count)} de carte dans la boîte</div>
 <ul id="paquet_list">
     ${lines}
 </ul>
@@ -119,6 +120,30 @@ export const render = () => {
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
+
+    if (state.paquetSelected != undefined) {
+        const element = document.querySelector(".selected a") as HTMLElement | null
+        if (element) {
+            function computeX(x: number) {
+                if (x < 150)
+                    return 1.1
+                return (0.006018 * x) + 0.1443
+            }
+            function computeY(x: number) {
+                let numerator = 3.48 - 1.18;
+                let denominator = 1 + Math.pow((x / 81.7), 4.82);
+                let y = 1.18 + (numerator / denominator);
+                return y;
+            }
+
+            const width = element.clientWidth
+            const scaleX = computeX(width);
+            const scaleY = computeY(width);
+
+            element.style.setProperty("--scaleX", scaleX.toString())
+            element.style.setProperty("--scaleY", scaleY.toString())
+        }
+    }
 }
 
 

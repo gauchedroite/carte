@@ -1,5 +1,6 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
+import { capitalize } from "../utils.js";
 //
 import { state } from "./state.js";
 
@@ -7,14 +8,12 @@ export const NS = "GBONJOUR";
 
 
 const template = () =>{
-    let username = state.username
-    username = username.charAt(0).toUpperCase() + username.slice(1)
     return `
     <div class="title" style="padding-top:10rem;">BONJOUR</div>
-    <div class="title" style="padding-top:0;">${username}!</div>
+    <div class="title" style="padding-top:0;">${capitalize(state.username)}!</div>
 
-    <div style="text-align:center;">
-        <button type="button" class="oval" style="margin-top:8rem; color:green; font-size:175%;" onclick="${NS}.onBegin()">&nbsp;Choisir un paquet!&nbsp;</button>
+    <div style="margin-top:3rem; text-align:center;">
+        <button type="button" class="oval" style="color:green; font-size:175%;" onclick="${NS}.onBegin()">&nbsp;Choisir un paquet!&nbsp;</button>
     </div>
 `
 }
