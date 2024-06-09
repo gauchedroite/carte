@@ -93,7 +93,7 @@ const kanvasFooter = () => {
     const info = `
         <div class="info">
             <div>Carte: ${carteIndex + 1}/${paquet.cartes.length}</div>
-            <div><b>${paquet.nom}</b></div>
+            <div><b>#${carte.carteid}/${paquet.nom}</b></div>
             <div>Face: ${faceindex + 1}/${carte.faces.length}</div>
         </div>
     `

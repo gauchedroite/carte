@@ -12,13 +12,30 @@ const publicPath = path.join(__dirname, "../public");
 const dataPath = path.join(__dirname, "../public/data");
 const srcPath = path.join(__dirname, "../src");
 
-// Configure express virtual folders
-app.use(express.static(publicPath));
+
+// Configure access to data files, without caching
+app.use("/data", (req, res, next) => {
+    console.log(`Accessing /data endpoint: ${req.method} ${req.url} at ${new Date().toISOString()}`);
+
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
+    res.set("Surrogate-Control", "no-store");
+
+    next();
+});
+
+app.use("/data", express.static(dataPath));
+
+// Configure access to source files by the browser
 app.use("/src", express.static(srcPath));
+
+// Configure express default virtual folder
+app.use(express.static(publicPath));
+
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: "50mb" }));
-
 
 
 
@@ -90,6 +107,7 @@ app.post("/upload-face", async (req, res) => {
 
         await fs.writeFile(filePath, base64Data, "base64");
 
+        console.log('Successfully saved face');
         res.status(200).send("File uploaded and saved as " + fileName);
     }
     catch (error) {
