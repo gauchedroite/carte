@@ -32,10 +32,10 @@ const menuTemplate = () => {
                 <path stroke-width="2" d="M4 22 L26 22"></path>
             </svg>
         </div>
-        <div id="menu_center" onclick="${NS}.showTools()">
+        <div id="menu_center" class="active-shrink" onclick="${NS}.showTools()">
             <img src="./icones/icone-edit.svg" title="Edit">
         </div>
-        <div id="menu_right" onclick="window.location.href='#/paquet/${paquet.nom}'">
+        <div id="menu_right" class="active-shrink" onclick="window.location.href='#/paquet/${paquet.nom}'">
             <img src="./icones/icone-back.svg" title="Aller au paquet" width="20" height="20">
         </div>
     </div>
@@ -67,25 +67,25 @@ const kanvasFooter = () => {
         const status = state.getCardStatus(cardid)
         const success = status?.success
         buttons = `
-            <button type="button" class="oval ov3 ${success != undefined ? success ? "success" : "" : ""}" onclick="${NS}.onClickResult('success')">
+            <button type="button" class="oval ov3 active-shrink ${success != undefined ? success ? "success" : "" : ""}" onclick="${NS}.onClickResult('success')">
                 <img src="./icones/icone-check.svg" title="carte réussie" width="50" height="50">
             </button>
-            <button type="button" class="oval ${success != undefined ? success ? "" : "fail" : ""}" onclick="${NS}.onClickResult('failure')">
+            <button type="button" class="oval active-shrink ${success != undefined ? success ? "" : "fail" : ""}" onclick="${NS}.onClickResult('failure')">
                 <img src="./icones/icone-delete.svg" title="carte échouée" width="50" height="50">
             </button>`
     }
     else if (!isFirstFace) {
         buttons = `
-            <button type="button" class="oval ov1" onclick="window.location.href='#/carte/${cardid}/${faceindex - 1}'">
+            <button type="button" class="oval ov1 active-shrink" onclick="window.location.href='#/carte/${cardid}/${faceindex - 1}'">
                 <img src="./icones/icone-previous2.svg" title="face précédente" width="50" height="50">
             </button>
-            <button type="button" class="oval ov2" onclick="window.location.href='#/carte/${cardid}/${faceindex + 1}'">
+            <button type="button" class="oval ov2 active-shrink" onclick="window.location.href='#/carte/${cardid}/${faceindex + 1}'">
                 <img src="./icones/icone-next2.svg" title="face suivante" width="50" height="50">
             </button>`
     }
     else {
         buttons = `
-            <button type="button" class="oval ov2" onclick="window.location.href='#/carte/${cardid}/1'">
+            <button type="button" class="oval ov2 active-shrink" onclick="window.location.href='#/carte/${cardid}/1'">
                 <img src="./icones/icone-next2.svg" title="face suivante" width="50" height="50">
             </button>`
     }

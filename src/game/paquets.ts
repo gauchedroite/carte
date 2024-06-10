@@ -53,6 +53,7 @@ const template = () => {
             const success = status?.success
 
             const classList: string[] = []
+            classList.push("active-shrink")
 
             if (success != undefined)
                 classList.push(success ? "success" : "fail")
@@ -81,8 +82,8 @@ const modal = () => {
         <div class="modal-title">Nom du nouveau paquet:</div>
         <input type="text" title="Nom" required>
         <div class="buttons-row">
-            <button type="button" class="oval cancel" onclick="${NS}.onModal('close')">Annuler</button>
-            <button type="button" class="oval ok" onclick="${NS}.onModal('ok')">&nbsp;OK&nbsp;</button>
+            <button type="button" class="oval cancel active-shrink" onclick="${NS}.onModal('close')">Annuler</button>
+            <button type="button" class="oval ok active-shrink" onclick="${NS}.onModal('ok')">&nbsp;OK&nbsp;</button>
         </div>
     </div>
 </div>

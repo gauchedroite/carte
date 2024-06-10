@@ -294,7 +294,7 @@ class State {
             }
         })
 
-        const success = (!undecided ? ok : null)
+        const success = (!undecided && paquet.cartes.length > 0 ? ok : null)
 
         let localStatus = <ILocalPaquet>{
             success

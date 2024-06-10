@@ -287,6 +287,14 @@ body {
     }
 }
 
+.active-shrink:active {
+    transform: scale(0.85);
+}
+
+.active-color:active {
+    background-color: yellowgreen;
+}
+
 /* 
 Voir https://codemyui.com/hand-drawn-pencil-circle-hover/
 */

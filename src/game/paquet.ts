@@ -24,7 +24,7 @@ const menuTemplate = () => {
             </svg>
         </div>
         <div id="menu_center_title">Paquet</div>
-        <div id="menu_right" onclick="window.location.href='#/paquets'">
+        <div id="menu_right" class="active-shrink" onclick="window.location.href='#/paquets'">
             <img src="./icones/icone-back.svg" title="Aller à la boîte de paquets" width="20" height="20">
         </div>
     </div>
@@ -62,6 +62,7 @@ const template = () => {
             const success = status?.success
 
             const classList: string[] = []
+            classList.push("active-shrink")
 
             if (success != undefined)
                 classList.push(success ? "success" : "fail")
@@ -82,14 +83,6 @@ const template = () => {
 </div>
 <!--<div class="bravo">Bravo pour ta réussite!</div>-->
 `
-/*
-    <!--<div class="success"><div>1</div></div>
-    <div class="success selected"><div>2</div></div>
-    <div><div>3</div></div>
-    <div class="fail"><div>4</div></div>
-    <div class="success"><div>5</div></div>
-    <div class="success"><div>6</div></div>
-    <div class="success"><div>7</div></div>-->*/
 }
 
 const deleteModal = () => {
@@ -98,8 +91,8 @@ const deleteModal = () => {
     <div class="modal-content">
         <div class="modal-title centered">Veux-tu vraiment détruire ce paquet?</div>
         <div class="buttons-row">
-            <button type="button" class="oval cancel" onclick="${NS}.onDestroyPaquet('no')">Non</button>
-            <button type="button" class="oval ok" onclick="${NS}.onDestroyPaquet('yes')">&nbsp;Oui&nbsp;</button>
+            <button type="button" class="oval cancel active-shrink" onclick="${NS}.onDestroyPaquet('no')">Non</button>
+            <button type="button" class="oval ok active-shrink" onclick="${NS}.onDestroyPaquet('yes')">&nbsp;Oui&nbsp;</button>
         </div>
     </div>
 </div>
