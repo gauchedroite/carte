@@ -147,7 +147,7 @@ export const fetch = (args: string[] | undefined) => {
             carteIndex = state.getCarteIndex(paquet, cardid)
             isLastCard = carteIndex == paquet.cartes.length - 1;
         
-            myCroquis.loadImage(filename)
+            myCroquis.loadImage(`${filename}?${new Date().getTime()}`)
 
             burger_opened = false
         })

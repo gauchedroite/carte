@@ -16,6 +16,8 @@
                 cursor: default;
 
                 & button {
+                    background-color: var(--neutral-color);
+
                     &.success {
                         background-color: var(--success-color);
                     }

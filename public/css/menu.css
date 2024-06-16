@@ -16,7 +16,7 @@
         justify-content: space-between;
 
         .menu-top {
-            padding: 0.25rem;
+            padding: 0.5rem 0 0 0.5rem;
         }
 
         #menu_center {
@@ -24,8 +24,8 @@
             text-align: center;
 
             & img {
-                height: 32px;
-                padding-top: 4px;
+                height: 36px;
+                padding-top: 12px;
             }
         }
 
@@ -40,9 +40,13 @@
             line-height: 2rem;
 
             padding-right: 4px;
-            margin: 4px;
 
             text-align: center;
+
+            & img {
+                margin-top: 0.75rem;
+                margin-right: 0.75rem;
+            }
         }
     }
 }
@@ -98,7 +102,7 @@
     }
 
     &.opened {
-        top: 35px;
+        top: 44px;
     }
 }
 

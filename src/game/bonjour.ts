@@ -13,7 +13,7 @@ const template = () =>{
     <div class="title" style="padding-top:0;">${capitalize(state.username)}!</div>
 
     <div style="margin-top:3rem; text-align:center;">
-        <button type="button" class="oval active-shrink" style="color:green; font-size:175%;" onclick="${NS}.onBegin()">&nbsp;Choisir un paquet!&nbsp;</button>
+        <button type="button" class="oval active-shrink" style="color:green; font-size:175%;" onclick="${NS}.onBegin()">&nbsp;Choisis un paquet!&nbsp;</button>
     </div>
 `
 }

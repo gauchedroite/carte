@@ -16,6 +16,8 @@ netsh interface portproxy add v4tov4 listenport=4998 listenaddress=0.0.0.0 conne
 
 Le serveur (express) doit écouter toutes les interfaces (0.0.0.0) au lieu de localhost (la valeur par défaut). C'est une contrainte causée par mon utilisation de WSL pour le développement.
 
+Une fois que tout ça est fait, il suffit de lancer http://<adresse privée de mon laptop>:4998.
+
 ## Service
 Pour que "node server.js" sous WSL se lance automatiquement après un re-démarrage de l'ordinateur:
 

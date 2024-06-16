@@ -1,6 +1,6 @@
 button.oval {
     border-radius: 47% 46% 60% 46%;
-    background-color: white;
+    background-color: var(--neutral-color);
 
     border: 8px solid #eee;
     padding: 0.5rem;

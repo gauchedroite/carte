@@ -52,12 +52,13 @@ export class MyCroquis {
     }
 
     public eraseSurface() {
-        croquis.fillLayer("white")
+        croquis.clearLayer()
     }
 
     public loadImage(filename: string) {
-        const canvas = croquis.getLayerCanvas(1);
-        const ctx = canvas.getContext("2d");
+        const canvas = croquis.getLayerCanvas(1) as HTMLCanvasElement
+        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
     
         const img = new Image();
         img.onload = function() {
@@ -81,7 +82,7 @@ const croquis = new Croquis();
 croquis.lockHistory();
 croquis.setCanvasSize(canvas_width, canvas_height);
 croquis.addLayer();
-croquis.fillLayer('#fff');
+//croquis.fillLayer('#fff');
 croquis.addLayer();
 croquis.addLayer();
 croquis.selectLayer(1);

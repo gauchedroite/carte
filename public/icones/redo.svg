@@ -1,13 +1,8 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created using Krita: https://krita.org -->
-<svg xmlns="http://www.w3.org/2000/svg" 
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:krita="http://krita.org/namespaces/svg/krita"
-    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-    width="120pt"
-    height="120pt"
-    viewBox="0 0 120 120">
-<defs/>
-<path id="shape0" transform="matrix(-1.26130263493853 0 0 1.2256711409396 114.179999691057 32.0952477560418)" fill="none" stroke="#000000" stroke-width="7.6152" stroke-linecap="round" stroke-linejoin="bevel" d="M0 58.5269C94.0175 58.5269 128.057 -4.19527 13.184 0.222916" sodipodi:nodetypes="cc"/><path id="shape1" transform="matrix(-1.26130263493853 0 0 1.2256711409396 97.5509858468485 32.3684699562173)" fill="none" stroke="#000000" stroke-width="7.6152" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0C0 0 0 0 0 0" sodipodi:nodetypes="cc"/><path id="shape2" transform="matrix(-1.26130263493853 0 0 1.2256711409396 97.5509858468485 16.1700002499259)" fill="none" stroke="#000000" stroke-width="7.6152" stroke-linecap="round" stroke-linejoin="bevel" d="M0 13.216C1.51566 7.32178 21.0243 2.26496 27.232 0" sodipodi:nodetypes="cc"/><path id="shape3" transform="matrix(-1.26130263493853 0 0 1.2256711409396 97.5509858468485 32.3073461476732)" fill="none" stroke="#000000" stroke-width="7.6152" stroke-linecap="round" stroke-linejoin="bevel" d="M0 0.0498697C0.724372 -0.964251 25.4428 13.7843 27.008 17.3619" sodipodi:nodetypes="cc"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 120 120">
+<g stroke="red">
+  <path transform="matrix(-1.2613 0 0 1.22567 114.18 32.1)" fill="none" stroke-width="7.62" stroke-linecap="round" stroke-linejoin="bevel" d="M0 58.53c94.02 0 128.06-62.73 13.18-58.3"/>
+  <path transform="matrix(-1.2613 0 0 1.22567 97.55 32.37)" fill="none" stroke-width="7.62" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0s0 0 0 0"/>
+  <path transform="matrix(-1.2613 0 0 1.22567 97.55 16.17)" fill="none" stroke-width="7.62" stroke-linecap="round" stroke-linejoin="bevel" d="M0 13.22C1.52 7.32 21.02 2.26 27.23 0"/>
+  <path transform="matrix(-1.2613 0 0 1.22567 97.55 32.3)" fill="none" stroke-width="7.62" stroke-linecap="round" stroke-linejoin="bevel" d="M0 .05C.72-.96 25.44 13.78 27 17.36"/>
+</g>
 </svg>
