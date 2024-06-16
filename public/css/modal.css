@@ -12,7 +12,7 @@
         width: 80%;
         margin: auto;
         padding: 30px;
-        border: 2px solid #888;
+        border: 6px solid #dd852b;
         border-radius: 20px;
         box-shadow: 8px 8px 12px hsla(0, 0%, 0%, .3);
         background-color: var(--popup-bg-color);

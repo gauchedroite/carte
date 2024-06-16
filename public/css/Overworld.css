@@ -10,7 +10,7 @@
     --fail-color: #b4321f40;
     --neutral-color: #24605e20;
     --popup-bg-color: #f6f3e5;
-    --text-color: red;
+    --text-color: #0d0002;
 }
 
 * {
@@ -28,10 +28,10 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
+    user-select: none;
 }
 
 div[onclick],
