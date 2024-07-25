@@ -124,7 +124,7 @@ function canvasPointerUp(e: any) {
         canvasArea.style.setProperty('cursor', 'crosshair');
     croquis.up(pointerPosition.x, pointerPosition.y, e.pointerType === "pen" ? e.pressure : 1);
     if (e.pointerType === "pen" && e.button == 5)
-    setTimeout(function() {croquis.setPaintingKnockout(false/*selectEraserCheckbox.checked*/)}, 30);//timeout should be longer than 20 (knockoutTickInterval in Croquis)
+        setTimeout(function() {croquis.setPaintingKnockout(false/*selectEraserCheckbox.checked*/)}, 30);//timeout should be longer than 20 (knockoutTickInterval in Croquis)
     document.removeEventListener('pointermove', canvasPointerMove);
     document.removeEventListener('pointerup', canvasPointerUp);
 }

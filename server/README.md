@@ -4,7 +4,7 @@ Serveur pour les cartes de Laura.
 ## Accès au serveur à partir d'un LAN
 Une fois le serveur lancé avec `node server.js`, l'accès à l'application sur le poste de développement est trivial. Il suffit de lancer http://localhost:9340.
 
-Pour un accès par un iPad sur le LAN, il faut configurer quelques morceaux:
+Par contre, pour un accès par un iPad sur le LAN, il faut configurer quelques morceaux:
 
 1. Ouvrir un port sur le firewall, par exemple le port 4998.
 
@@ -17,6 +17,12 @@ netsh interface portproxy add v4tov4 listenport=4998 listenaddress=0.0.0.0 conne
 Le serveur (express) doit écouter toutes les interfaces (0.0.0.0) au lieu de localhost (la valeur par défaut). C'est une contrainte causée par mon utilisation de WSL pour le développement.
 
 Une fois que tout ça est fait, il suffit de lancer http://<adresse privée de mon laptop>:4998.
+
+Deux autres commandes `netsh` bonnes à connaître:
+```
+netsh interface portproxy show all
+netsh interface portproxy delete v4tov4 listenport=4998 listenaddress=0.0.0.0
+```
 
 ## Service
 Pour que "node server.js" sous WSL se lance automatiquement après un re-démarrage de l'ordinateur:
