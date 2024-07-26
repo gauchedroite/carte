@@ -2,68 +2,85 @@ const body_style = getComputedStyle(document.body);
 const canvas_width = body_style.getPropertyValue('--canvas-width').replace("px", "");
 const canvas_height = body_style.getPropertyValue('--canvas-height').replace("px", "");
 
+interface XY {
+    x: number | null,
+    y: number | null
+}
+
 
 export class MyCroquis {
     public canvasID = "drawing_canvas";
     canvas!: HTMLCanvasElement;
     ctx!: CanvasRenderingContext2D;
+    rect!: DOMRect;
 
-    isDrawing = false;
-    lastPoint = { x: 0, y: 0 };
-    currentPoint = { x: 0, y: 0 };
+    drawing = false;
+    moved = false;
+    point: XY = {x: null, y: null};
 
     public use(filename: string) {
-        this.canvas = document.getElementById(this.canvasID)! as HTMLCanvasElement;
-        this.ctx = this.canvas.getContext('2d')!;
+        const canvas = this.canvas = document.getElementById(this.canvasID)! as HTMLCanvasElement;
+        const ctx = this.ctx = this.canvas.getContext('2d')!;
+        const rect = this.rect = this.canvas.getBoundingClientRect();
+
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
 
         this.loadImage(`${filename}?${new Date().getTime()}`);
 
-        this.canvas.addEventListener("touchstart", this.touch_start)
-        this.canvas.addEventListener("touchmove", this.touch_move)
-        this.canvas.addEventListener("touchend", this.touch_end)
-    }
+        const me = this;
 
-    touch_start(e: TouchEvent) {
-        if (e.touches.length > 0) {
-            this.isDrawing = true;
+        canvas.addEventListener("touchstart", function(e) {
             const touch = e.touches[0];
-            this.lastPoint = { x: touch.clientX, y: touch.clientY };
-        }
-    }
+            me.startDrawing(touch.clientX, touch.clientY)
+        });
 
-    touch_move(e: TouchEvent) {
-        if (!this.isDrawing) return;
-        if (e.touches.length > 0) {
+        canvas.addEventListener("touchmove", function(e) {
+            e.preventDefault();
             const touch = e.touches[0];
-            this.currentPoint = { x: touch.clientX, y: touch.clientY };
-            this.drawSmoothLine(this.lastPoint, this.currentPoint);
-            this.lastPoint = this.currentPoint;
-        }
-        e.preventDefault();
+            me.drawTo(touch.clientX, touch.clientY, touch.force);
+        });
+
+        canvas.addEventListener("touchend", function() { me.stopDrawing() });
+
+        canvas.addEventListener("mousedown", function(e) { me.startDrawing(e.clientX, e.clientY) });
+        canvas.addEventListener("mousemove", function(e: any) {
+            if (e.pointerType === "pen") {
+                me.drawTo(e.clientX, e.clientY, e.pressure);
+            } else {
+                me.drawTo(e.clientX, e.clientY, 1);
+            }
+        });
+        canvas.addEventListener("mouseup", function() { me.stopDrawing() });
+        canvas.addEventListener("mouseout", function() { me.stopDrawing() });
     }
 
-    touch_end() {
-        this.isDrawing = false;
-    }
+    startDrawing (x: number, y: number) {
+        this.drawing = true;
+        this.moved = false;
+        this.point.x = x;
+        this.point.y = y;
+        this.ctx.beginPath();
+        this.ctx.moveTo(x - this.rect.x, y - this.rect.y);
+    };
 
-    drawSmoothLine(start: any, end: any) {
-        const midPoint = {
-            x: (start.x + end.x) / 2,
-            y: (start.y + end.y) / 2
-        };
+    drawTo (x: number, y: number, pressure: number) {
+        if (!this.drawing) return;
+        this.ctx.lineWidth = 1; //pressure * 100;
+        this.ctx.lineTo(x - this.rect.x, y - this.rect.y);
+        this.ctx.stroke();
+        this.moved = true;
+    };
 
-        const ctx = this.ctx;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 2;
-
-        ctx.beginPath();
-        ctx.moveTo(start.x, start.y);
-        ctx.quadraticCurveTo(start.x, start.y, midPoint.x, midPoint.y);
-        ctx.quadraticCurveTo(midPoint.x, midPoint.y, end.x, end.y);
-        ctx.stroke();
-    }
+    stopDrawing () {
+        if (!this.moved && this.point.x != null && this.point.y != null)
+            this.drawTo(this.point.x + 1, this.point.y + 1, 0.5);
+        this.ctx.closePath();
+        this.drawing = false;
+        this.moved = false;
+        this.point.x = null;
+        this.point.y = null;
+    };
 
     public brushImagePointerDown(image: HTMLImageElement, isDefaultBrush: boolean) {
         // currentBrush = image;
