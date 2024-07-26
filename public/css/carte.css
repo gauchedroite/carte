@@ -1,7 +1,7 @@
 
 #g_carte {
     #kanvas {
-        display: unset;
+/*        display: unset;*/
 
         #footer {
             position: absolute;
@@ -43,5 +43,12 @@
 
     .left-tools.show {
         display: unset;
-    }   
+    }
+
+    #drawing_canvas {
+        width: var(--canvas-width);
+        height: var(--canvas-height);
+        display: block;
+        touch-action: none;
+    }
 }

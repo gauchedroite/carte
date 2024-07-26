@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartes pour Laura</title>
+    <meta name="description" content="Cartes pour Laura, Auteur: Papi">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+    <link rel="icon" href="images/carte-180x180.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Pour Laura!">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/carte-180x180.png">
+    <link rel="apple-touch-startup-image" sizes="2732x2048" href="images/bonjour-2732x2048.png" />
+    
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body unselectable="on">
+
+    <script id="import_main" type="text/javascript">
+        APP = {}
+        APP.roots = []
+        APP.admin = true
+    </script>
+
+<canvas id="drawingCanvas" style="display:block; touch-action:none;"></canvas>
+
+    <div class="grid-container">
+        <div class="left-tools">
+            <div class="tools-nav">
+                <button type="button" id="undo" class="oval active-shrink active-color">
+                    <img src="./icones/undo.svg" title="undo" width="20" height="15" >
+                </button>
+                <button type="button" id="redo" class="oval active-shrink active-color">
+                    <img src="./icones/redo.svg" title="redo" width="20" height="15" >
+                </button>
+            </div>
+            <div class="tools-color">
+                <div class="tool-section">Palette de couleurs</div>
+                <div class="color-cells">
+                    <div id="cell_black" style="background-color: rgb(0, 0, 0);" class="selected"></div>
+                    <div id="cell_viridian_green" style="background-color: rgb(64, 130, 109);"></div>
+                    <div id="cell_burnt_sienna" style="background-color: rgb(233, 116, 81);"></div>
+                    <div id="cell_ultramarine_blue" style="background-color: rgb(18, 10, 143);"></div>
+                    <div id="cell_white" style="background-color: rgb(255, 255, 255);"></div>
+                    <div id="cell_cadmium_yellow" style="background-color: rgb(255, 246, 0);"></div>
+                    <div id="cell_alizarin_crimson" style="background-color: rgb(227, 38, 54);"></div>
+                    <div id="cell_raw_umber" style="background-color: rgb(115, 74, 18);"></div>
+                </div>
+            </div>
+            <div class="tools-brush">
+                <div class="tool-section">Pinceau</div>
+                <div class="brush-cells">
+                    <div id="cell_round" class="selected" style="padding:7px 0 0 20px;"><img src="./images/imperfect-circle.svg" title="brush" width="25" height="25" ></div>
+                    <div id="cell_heart"><img src="images/b0.png" title="brush" height="40"></div>
+                    <div id="cell_bar"><img src="images/b4.png" title="brush" height="40"></div>
+                </div>
+            </div>
+            <div class="tools-size">
+                <div class="tool-section">Dimension du pinceau</div>
+                <div class="size-cells">
+                    <div id="cell_small" style="padding:10px 0 0 24px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="15" height="15" >
+                    </div>
+                    <div id="cell_medium" style="padding:7px 0 0 20px;" class="selected">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" >
+                    </div>
+                    <div id="cell_big">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="40" height="40">
+                    </div>
+                </div>
+            </div>
+            <div class="tools-opacity">
+                <div class="tool-section">Opacité du pinceau</div>
+                <div class="opacity-cells">
+                    <div id="cell_low" style="padding:7px 0 0 20px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" style="opacity:0.1;">
+                    </div>
+                    <div id="cell_mid" style="padding:7px 0 0 20px;">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" style="opacity:0.4;">
+                    </div>
+                    <div id="cell_full" style="padding:7px 0 0 20px;" class="selected">
+                        <img src="./images/imperfect-circle.svg" title="circle" width="25" height="25" >
+                    </div>
+                </div>
+            </div>
+            <div class="tools-action">
+                <div class="tool-section">&nbsp;</div>
+                <div class="action-buttons">
+                    <button type="button" id="erase_all" class="oval active-shrink active-color"><img src="./icones/icone-blank.svg" title="erase" width="32" height="24"></button>
+                    <button type="button" id="save_canvas" class="oval active-shrink active-color"><img src="./icones/icone-save.svg" title="save" width="32" height="24"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-canvas">
+            <div class="page-area" id="app_root"></div>
+
+            <div id="kanvas">
+                <div id="canvas_surface"></div>
+                <div id="footer"></div>
+            </div>
+        </div>
+
+        <div class="center-canvas-top"></div>
+    </div>
+
+    <script src="./lib/morphdom-umd.js"></script>
+    <script src="./lib/croquis.js"></script>
+    <script type="module" src="./js/index.js"></script>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastPoint = { x: 0, y: 0 };
+        let currentPoint = { x: 0, y: 0 };
+
+        // Resize canvas to fit window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Touch events for Apple Pencil drawing
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+                isDrawing = true;
+                const touch = e.touches[0];
+                lastPoint = { x: touch.clientX, y: touch.clientY };
+            }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                currentPoint = { x: touch.clientX, y: touch.clientY };
+                drawSmoothLine(lastPoint, currentPoint);
+                lastPoint = currentPoint;
+            }
+            e.preventDefault();
+        });
+
+        canvas.addEventListener('touchend', () => {
+            isDrawing = false;
+        });
+
+        function drawSmoothLine(start, end) {
+            const midPoint = {
+                x: (start.x + end.x) / 2,
+                y: (start.y + end.y) / 2
+            };
+
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.quadraticCurveTo(start.x, start.y, midPoint.x, midPoint.y);
+            ctx.quadraticCurveTo(midPoint.x, midPoint.y, end.x, end.y);
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
