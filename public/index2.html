@@ -111,61 +111,77 @@
     <script type="module" src="./js/index.js"></script>
 
     <script>
-        const canvas = document.getElementById('drawingCanvas');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-        let lastPoint = { x: 0, y: 0 };
-        let currentPoint = { x: 0, y: 0 };
+        const canvas = document.getElementById("drawingCanvas");
+        const ctx = canvas.getContext("2d");
+        
+        let drawing = false;
+        let moved = false;
+        var point = {x: null, y: null};
 
-        // Resize canvas to fit window
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = 500;//window.innerWidth;
+            canvas.height = 500; //window.innerHeight;
+
+            // We need to set these properties after a canvas resize
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
         }
-        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener("resize", resizeCanvas);
         resizeCanvas();
 
-        // Touch events for Apple Pencil drawing
-        canvas.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 0) {
-                isDrawing = true;
-                const touch = e.touches[0];
-                lastPoint = { x: touch.clientX, y: touch.clientY };
-            }
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            if (!isDrawing) return;
-            if (e.touches.length > 0) {
-                const touch = e.touches[0];
-                currentPoint = { x: touch.clientX, y: touch.clientY };
-                drawSmoothLine(lastPoint, currentPoint);
-                lastPoint = currentPoint;
-            }
-            e.preventDefault();
-        });
-
-        canvas.addEventListener('touchend', () => {
-            isDrawing = false;
-        });
-
-        function drawSmoothLine(start, end) {
-            const midPoint = {
-                x: (start.x + end.x) / 2,
-                y: (start.y + end.y) / 2
-            };
-
-            ctx.lineJoin = 'round';
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
-
+        const startDrawing = (x, y) => {
+            drawing = true;
+            moved = false;
+            point.x = x;
+            point.y = y;
             ctx.beginPath();
-            ctx.moveTo(start.x, start.y);
-            ctx.quadraticCurveTo(start.x, start.y, midPoint.x, midPoint.y);
-            ctx.quadraticCurveTo(midPoint.x, midPoint.y, end.x, end.y);
+            ctx.moveTo(x, y);
+        };
+
+        const drawTo = (x, y, pressure) => {
+            if (!drawing) return;
+            ctx.lineWidth = 1; //pressure * 100;  // Adjust pressure sensitivity
+            ctx.lineTo(x, y);
             ctx.stroke();
-        }
+            moved = true;
+        };
+
+        const stopDrawing = () => {
+            if (!moved && point.x != null && point.y != null)
+                drawTo(point.x + 1, point.y + 1, 0.5);
+            ctx.closePath();
+            drawing = false;
+            moved = false;
+            point.x = null;
+            point.y = null;
+        };
+        
+        canvas.addEventListener("touchstart", (e) => {
+            const touch = e.touches[0];
+            startDrawing(touch.clientX, touch.clientY)
+        });
+
+        canvas.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            drawTo(touch.clientX, touch.clientY, touch.force);
+        });
+
+        canvas.addEventListener("touchend", stopDrawing);
+
+        canvas.addEventListener("mousedown", (e) => startDrawing(e.clientX, e.clientY));
+        canvas.addEventListener("mousemove", (e) => {
+            if (e.pointerType === "pen") {
+                drawTo(e.clientX, e.clientY, e.pressure);
+            } else {
+                drawTo(e.clientX, e.clientY, 1);
+            }
+        });
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("mouseout", stopDrawing);
+
     </script>
 </body>
 </html>
