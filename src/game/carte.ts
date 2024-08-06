@@ -1,7 +1,7 @@
 import * as App from "../core/app.js"
 import * as router from "../core/router.js"
 import { state, ICarte, IPaquet } from "./state.js";
-import { myCroquis } from "./mycroquis2.js"
+import { myCroquis } from "./mycroquis.js"
 
 export const NS = "G_Carte"
 

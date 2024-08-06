@@ -3,7 +3,7 @@ import * as router from "../core/router.js"
 import * as bonjour from "./bonjour.js"
 import * as paquets from "./paquets.js"
 import * as paquet from "./paquet.js"
-import * as carte from "./carte2.js"            ////////
+import * as carte from "./carte.js"            ////////
 
 
 (window as any)[bonjour.NS] = bonjour;

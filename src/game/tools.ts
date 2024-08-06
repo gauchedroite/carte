@@ -1,4 +1,4 @@
-import { myCroquis } from "./mycroquis2.js";
+import { myCroquis } from "./mycroquis.js";
 
 const my = myCroquis;
 
