@@ -34,19 +34,21 @@ export class Tools {
         })
 
         const brush_cells = document.querySelector(".brush-cells")!;
-        const brush_divs = brush_cells.querySelectorAll("div")!;
-        brush_divs.forEach(function (element) {
-            element.addEventListener("pointerdown", function (event: Event) {
-                const selected = brush_cells.querySelector(".selected")
-                selected?.classList.remove("selected")
-                element.classList.add("selected")
+        if (brush_cells) {
+            const brush_divs = brush_cells.querySelectorAll("div")!;
+            brush_divs.forEach(function (element) {
+                element.addEventListener("pointerdown", function (event: Event) {
+                    const selected = brush_cells.querySelector(".selected")
+                    selected?.classList.remove("selected")
+                    element.classList.add("selected")
 
-                const isDefaultBrush = element.id == "cell_round"
-                const target = event.currentTarget as Element
-                const image = target.querySelector("img")!
-                my.brushImagePointerDown(image, isDefaultBrush)
+                    const isDefaultBrush = element.id == "cell_round"
+                    const target = event.currentTarget as Element
+                    const image = target.querySelector("img")!
+                    my.brushImagePointerDown(image, isDefaultBrush)
+                })
             })
-        })
+        }
 
         const size_cells = document.querySelector(".size-cells")!;
         const size_divs = size_cells.querySelectorAll("div")!;
@@ -63,18 +65,20 @@ export class Tools {
         })
 
         const opacity_cells = document.querySelector(".opacity-cells")!;
-        const opacity_divs = opacity_cells.querySelectorAll("div")!;
-        opacity_divs.forEach(function (element) {
-            element.addEventListener("pointerdown", function (event: Event) {
-                const selected = opacity_cells.querySelector(".selected")
-                selected?.classList.remove("selected")
-                element.classList.add("selected")
-
-                const id = element.id
-                const alpha = id == "cell_low" ? 10 : id == "cell_mid" ? 40 : 100
-                my.updateOpacity(alpha / 100)
+        if (opacity_cells) {
+            const opacity_divs = opacity_cells.querySelectorAll("div")!;
+            opacity_divs.forEach(function (element) {
+                element.addEventListener("pointerdown", function (event: Event) {
+                    const selected = opacity_cells.querySelector(".selected")
+                    selected?.classList.remove("selected")
+                    element.classList.add("selected")
+    
+                    const id = element.id
+                    const alpha = id == "cell_low" ? 10 : id == "cell_mid" ? 40 : 100
+                    my.updateOpacity(alpha / 100)
+                })
             })
-        })
+        }
 
         const erase_all = document.getElementById("erase_all")!;
         erase_all.addEventListener("click", function () {

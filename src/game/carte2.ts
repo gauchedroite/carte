@@ -130,11 +130,11 @@ const deleteModal = () => {
     `
 }
 
-const pagetemplate = (menu: string, modal1: string, draw: string) => {
+const pagetemplate = (menu: string, modal1: string, draw: string, footer: string) => {
     return `
     <form>
         <input type="submit" style="display:none;" id="${NS}_dummy_submit">
-        ${menu + modal1 + draw}
+        ${menu + modal1 + draw + footer}
     </form>
     <div class="toast" id="carte_done">Terminé les cartes!<br>On retourne au paquet.</div>
     <div class="toast" id="next_carte">On change de carte.</div>
@@ -167,15 +167,13 @@ export const render = () => {
     if (!App.inContext(NS)) return ""
 
     const modal1 = show_delete_card_modal ? deleteModal() : ""
-    return pagetemplate(menuTemplate(), modal1, drawTemplate());
+    return pagetemplate(menuTemplate(), modal1, drawTemplate(), kanvasFooter());
 }
 
 export const postRender = () => {
     if (!App.inContext(NS)) return
            
     myCroquis.use(filename);
-
-    App.renderPartial("footer", kanvasFooter())
 }
 
 

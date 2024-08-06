@@ -18,6 +18,11 @@ export class MyCroquis {
     moved = false;
     point: XY = {x: null, y: null};
 
+    size = 25; // same as index.html #cell_medium
+    rgb = "rgb(0, 0, 0)";// same as index.html #cell_black
+    alpha = 1;// same as index.html #cell_full
+
+    
     public use(filename: string) {
         const canvas = this.canvas = document.getElementById(this.canvasID)! as HTMLCanvasElement;
         const ctx = this.ctx = this.canvas.getContext('2d')!;
@@ -25,6 +30,7 @@ export class MyCroquis {
 
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
+        this.updateSize(this.size)
 
         this.loadImage(`${filename}?${new Date().getTime()}`);
 
@@ -66,7 +72,7 @@ export class MyCroquis {
 
     drawTo (x: number, y: number, pressure: number) {
         if (!this.drawing) return;
-        this.ctx.lineWidth = 1; //pressure * 100;
+        this.ctx.lineWidth = this.size * pressure;
         this.ctx.lineTo(x - this.rect.x, y - this.rect.y);
         this.ctx.stroke();
         this.moved = true;
@@ -89,15 +95,17 @@ export class MyCroquis {
     }
 
     public updateColor(rgb: string) {
-        //brush.setColor(rgb)
+        this.rgb = rgb
+        this.setRgba()
     }
 
     public updateSize(px: number) {
-        //brush.setSize(px)
+        this.size = px / 5
     }
 
     public updateOpacity(alpha: number) {
-        //croquis.setPaintingOpacity(alpha)
+        this.alpha = alpha
+        this.setRgba()
     }
 
     public undo() {
@@ -108,8 +116,19 @@ export class MyCroquis {
         //croquis.redo()
     }
 
+    setRgba() {
+        const colors = this.rgb.match(/\d+/g)!
+        const r = colors[0]
+        const g = colors[1]
+        const b = colors[2]
+        const rgba = `rgba(${r}, ${g}, ${b}, ${this.alpha})`
+
+        this.ctx.fillStyle = rgba
+        this.ctx.strokeStyle = rgba
+    }
+
     public eraseSurface() {
-        //croquis.clearLayer()
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     public loadImage(filename: string) {
