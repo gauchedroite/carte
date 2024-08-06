@@ -7,10 +7,15 @@ import { state } from "./state.js";
 export const NS = "GBONJOUR";
 
 
-const template = () =>{
+const template = () => {
     return `
-    <div class="title" style="padding-top:10rem;">BONJOUR</div>
-    <div class="title" style="padding-top:0;">${capitalize(state.username)}!</div>
+    <div id="image"></div>
+    <div class="imperfect-horizontal-line"></div>
+
+    <div class="title" style="padding-top:2.5rem;">
+        BONJOUR<br>
+        ${capitalize(state.username)}!
+    </div>
 
     <div style="margin-top:3rem; text-align:center;">
         <button type="button" class="oval active-shrink" style="color:green; font-size:175%;" onclick="${NS}.onBegin()">&nbsp;Choisis un paquet!&nbsp;</button>
