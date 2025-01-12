@@ -1,7 +1,2 @@
 {
-    "liveServer.settings.port": 5505,
-    "liveServer.settings.root": "/public",
-    "liveServer.settings.mount": [
-        ["/src", "./src"]
-    ]
 }

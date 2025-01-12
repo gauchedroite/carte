@@ -1,14 +1,14 @@
-# carte server
+# Carte server
 Serveur pour les cartes de Laura.
 
-## Accès au serveur à partir d'un LAN
-Une fois le serveur lancé avec `node server.js`, l'accès à l'application sur le poste de développement est trivial. Il suffit de lancer http://localhost:9340.
+## Accès au serveur de cartes à partir d'un LAN
+Une fois le serveur lancé avec `node server.js`, l'accès à l'application sur le poste de développement est trivial. Il suffit de lancer `http://localhost:9340`.
 
 Par contre, pour un accès par un iPad sur le LAN, il faut configurer quelques morceaux:
 
 1. Ouvrir un port sur le firewall, par exemple le port 4998.
 
-2. Connecter le port externe 4998 au port interne 9340 du serveur:
+2. Connecter ce port externe 4998 au port interne 9340 du serveur:
 
 ```
 netsh interface portproxy add v4tov4 listenport=4998 listenaddress=0.0.0.0 connectport=9340 connectaddress=127.0.0.1
@@ -16,9 +16,9 @@ netsh interface portproxy add v4tov4 listenport=4998 listenaddress=0.0.0.0 conne
 
 Le serveur (express) doit écouter toutes les interfaces (0.0.0.0) au lieu de localhost (la valeur par défaut). C'est une contrainte causée par mon utilisation de WSL pour le développement.
 
-Une fois que tout ça est fait, il suffit de lancer http://<adresse privée de mon laptop>:4998.
+Une fois que tout ça est fait, il suffit de lancer `http://<adresse privée de mon laptop>:4998`.
 
-Deux autres commandes `netsh` bonnes à connaître:
+Voici deux autres commandes `netsh` bonnes à connaître:
 ```
 netsh interface portproxy show all
 netsh interface portproxy delete v4tov4 listenport=4998 listenaddress=0.0.0.0
